@@ -7,7 +7,7 @@ module ins_memory(
 );
 input               clock;
 input               read;
-input[5:0]          address; // 6 memory blocks
+input[27:0]          address; // 28 bit memory blocks
 output reg [127:0]  readdata;// 128 bit block size
 output reg          busywait;
 
@@ -30,6 +30,8 @@ begin
     {memory_array[10'd15], memory_array[10'd14], memory_array[10'd13], memory_array[10'd12]} = 32'b00000000000000010000000001011010; // loadi 1 90
     {memory_array[10'd19], memory_array[10'd18], memory_array[10'd17], memory_array[10'd16]} = 32'b00000011000000010000000100000100; // sub 1 1 4
     */
+
+    //TODO: try to read the instruction from file
 
     // loadi 0 0xFA
     {memory_array[10'd3],  memory_array[10'd2],  memory_array[10'd1],  memory_array[10'd0]}    = 32'b00000101_000000000000000011111010;
