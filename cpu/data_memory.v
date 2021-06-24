@@ -72,25 +72,25 @@ begin
 	end
 	if(writeaccess)
 	begin
-		memory_array[{address,2'b0000}] = #40 writedata[7:0];
-		memory_array[{address,2'b0001}] = #40 writedata[15:8];
-		memory_array[{address,2'b0010}] = #40 writedata[23:16];
-		memory_array[{address,2'b0011}] = #40 writedata[31:24];
+		memory_array[{address,4'b0000}] = #40 writedata[7:0];
+		memory_array[{address,4'b0001}] = #40 writedata[15:8];
+		memory_array[{address,4'b0010}] = #40 writedata[23:16];
+		memory_array[{address,4'b0011}] = #40 writedata[31:24];
 		
-		memory_array[{address,2'b0100}] = #40 writedata[39:32];
-		memory_array[{address,2'b0101}] = #40 writedata[47:40];
-		memory_array[{address,2'b0110}] = #40 writedata[55:48];
-		memory_array[{address,2'b0111}] = #40 writedata[63:56];
+		memory_array[{address,4'b0100}] = #40 writedata[39:32];
+		memory_array[{address,4'b0101}] = #40 writedata[47:40];
+		memory_array[{address,4'b0110}] = #40 writedata[55:48];
+		memory_array[{address,4'b0111}] = #40 writedata[63:56];
 
-		memory_array[{address,2'b1000}] = #40 writedata[71:64];
-		memory_array[{address,2'b1001}] = #40 writedata[79:72];
-		memory_array[{address,2'b1010}] = #40 writedata[87:80];
-		memory_array[{address,2'b1011}] = #40 writedata[95:88];
+		memory_array[{address,4'b1000}] = #40 writedata[71:64];
+		memory_array[{address,4'b1001}] = #40 writedata[79:72];
+		memory_array[{address,4'b1010}] = #40 writedata[87:80];
+		memory_array[{address,4'b1011}] = #40 writedata[95:88];
 
-		memory_array[{address,2'b1100}] = #40 writedata[103:96];
-		memory_array[{address,2'b1101}] = #40 writedata[111:104];
-		memory_array[{address,2'b1110}] = #40 writedata[119:112];
-		memory_array[{address,2'b1111}] = #40 writedata[127:120];
+		memory_array[{address,4'b1100}] = #40 writedata[103:96];
+		memory_array[{address,4'b1101}] = #40 writedata[111:104];
+		memory_array[{address,4'b1110}] = #40 writedata[119:112];
+		memory_array[{address,4'b1111}] = #40 writedata[127:120];
 		busywait = 0;
 		writeaccess = 0;
 	end
@@ -109,9 +109,6 @@ begin
         busywait = 0;
 		readaccess = 0;
 		writeaccess = 0;
-
-		// for testing purpose
-		memory_array[2] = 8'hFF;
     end
 end
 
