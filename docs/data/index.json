@@ -1,0 +1,33 @@
+{
+    "title": "Piplined CPU and memory system according to Riskv instruction set",
+    "team": [
+        {
+            "name": "Thilarakathna W M D U",
+            "email": "e16366@eng.pdn.ac.lk",
+            "eNumber": "E/16/366",
+            "github_profile":"https://github.com/dtdinidu7",
+            "linkedin_profile":"https://www.linkedin.com/in/dinindu-thilakarathna/"
+        },
+        {
+            "name": "Dissanayake D M T H",
+            "email": "e16088@eng.pdn.ac.lk",
+            "eNumber": "E/16/088",
+            "github_profile":"https://github.com/HeshanDissanayake",
+            "linkedin_profile":"https://www.linkedin.com/in/heshan-dissanyake-7aa3a714b/"
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Dr. Isuru Navinna",
+            "email": "isurunawinne@eng.pdn.ac.lk",
+            "linkedin_profile":"https://www.linkedin.com/in/isuru-nawinne-73302833/",
+            "researchgate_profile":"https://www.researchgate.net/profile/Isuru-Nawinne"
+        },
+        {
+            "name": "Dr. Mahanama wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk",
+            "linkedin_profile":"https://www.linkedin.com/in/mahanama"            
+        }
+    ],
+    "tags": ["Web", "Embedded Systems", "Image Processing"]
+}
