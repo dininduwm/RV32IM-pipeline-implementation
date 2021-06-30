@@ -1,1 +1,1 @@
-# RISK-V pipelined CPU
+# RISC-V pipelined CPU
