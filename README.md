@@ -1,1 +1,1 @@
-# riskv-pipeline-cpu
+# RISCV-pipeline-cpu
