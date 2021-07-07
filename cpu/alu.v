@@ -25,7 +25,8 @@ module alu(DATA1, DATA2, RESULT, SELECT);
                 INTER_MULHU, 
                 INTER_DIV, 
                 INTER_REM, 
-                INTER_REMU; // intermediate signals to hold the calculations
+                INTER_REMU,
+                INTER_FWD; // intermediate signals to hold the calculations
 
     // TODO : set the time delay
     // assigning the values to the different operations
@@ -53,6 +54,8 @@ module alu(DATA1, DATA2, RESULT, SELECT);
     
     //TODO:  check this
     assign #1 INTER_REMU = $unsigned(DATA1) % $unsigned(DATA1); // Unsigned remainder of interger division
+
+    assign INTER_FWD = DATA1;
 
     always @ (*) // this block run if there is any change in DATA1 or DATA2 or SELECT
     begin
@@ -96,6 +99,8 @@ module alu(DATA1, DATA2, RESULT, SELECT);
                 RESULT = INTER_SRA; 
             5'b10000:
                 RESULT = INTER_SUB; 
+            5'b11xxx:
+                RESULT = INTER_FWD; 
                 
             default: RESULT = 0; //result 0 if the other cases
         endcase
