@@ -10,6 +10,7 @@ module alu(DATA1, DATA2, RESULT, SELECT);
     reg [31:0] RESULT; // declare the outputs as registers
 
     wire [31:0] INTER_ADD, 
+                INTER_SUB,
                 INTER_AND, 
                 INTER_OR, 
                 INTER_SLL, 
@@ -51,7 +52,7 @@ module alu(DATA1, DATA2, RESULT, SELECT);
     assign #1 INTER_REM = $signed(DATA1) % $signed(DATA1); // Signed remainder of integer division
     
     //TODO:  check this
-    assign #1 INTER_REMU = $signed(DATA1) % $signed(DATA1); // Unsigned remainder of interger division
+    assign #1 INTER_REMU = $unsigned(DATA1) % $unsigned(DATA1); // Unsigned remainder of interger division
 
     always @ (*) // this block run if there is any change in DATA1 or DATA2 or SELECT
     begin
