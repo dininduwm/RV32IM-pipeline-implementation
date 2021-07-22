@@ -50,10 +50,7 @@ always @(SELECT) begin
                 OUT = {{20{TYPE5[11]}}, TYPE5};
         // TYPE 6 
         3'b101:
-            if (SELECT[3] == 1'b1) 
-                OUT = {{27{1'b0}}, TYPE6};
-            else
-                OUT = {{27{TYPE6[4]}}, TYPE6};
+            OUT = {{27{1'b0}}, TYPE6};
     endcase
 end
 
