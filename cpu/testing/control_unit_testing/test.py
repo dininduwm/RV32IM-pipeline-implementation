@@ -65,7 +65,7 @@ with open('RV32IM.csv') as csv_file:
 
 def compileAndRun(filename):
     compil = "iverilog -o " + filename.replace('.v', '') + ".out " + filename
-    command = "cd .. ; cd verilog; " + compil +"; vvp " + filename.replace('.v', '') + ".out"
+    command = compil +"; vvp " + filename.replace('.v', '') + ".out"
 
 
     output = subprocess.Popen(command, stdout=subprocess.PIPE, shell= True).communicate()[0].decode('utf-8')
@@ -73,7 +73,7 @@ def compileAndRun(filename):
     output.pop()
     return output
 
-output = compileAndRun('control_unit_testbench.v')
+output = compileAndRun('testbench.v')
 # print(output)
 passcount = 0
 # looping throug the tests

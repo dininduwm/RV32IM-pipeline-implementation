@@ -1,6 +1,6 @@
-`include "control_unit.v"
+`include "../../verilog/control_unit.v"
 
-module reg_file_tb;
+module control_unit_tb;
 
     reg CLK, RESET;
     reg[31:0] INSTRUCTION;
@@ -31,7 +31,7 @@ module reg_file_tb;
     
     initial begin
         // load the instructions from the register file
-        $readmemb("../testing/testbench_input.txt", ins_file);        
+        $readmemb("testbench_input.txt", ins_file);        
         CLK = 1'b0;
         #1
 
