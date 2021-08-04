@@ -13,7 +13,7 @@ argKeys = {'-i': 'inp_file', '-o': 'out_file'}
 Instructions = []
 
 def format(numOfDigits, num):
-    return str(num).zfill(numOfDigits)
+    return str(num).zfill(numOfDigits)[:numOfDigits]
 
 # instruction formatting structure
 # loop through the instructions and do the nessary stuff
@@ -85,23 +85,23 @@ def handleInstruction(separatedIns):
         
     elif(inst_data[separatedIns[0]]['type'] == "S-Type"):
         # sw rs2:value, immediate, rs1:base
-        immediate = toBin(12, separatedIns[2])[::-1]
-        Instruction = immediate[5:] + space + toBin(5, separatedIns[1]) + space + toBin(5, separatedIns[3])+ space + inst_data[separatedIns[0]]['funct3']+ space + immediate[:5] + space + inst_data[separatedIns[0]]['opcode']
+        immediate = toBin(12, separatedIns[2])
+        Instruction = immediate[:7] + space + toBin(5, separatedIns[1]) + space + toBin(5, separatedIns[3])+ space + inst_data[separatedIns[0]]['funct3']+ space + immediate[7:] + space + inst_data[separatedIns[0]]['opcode']
     
     elif(inst_data[separatedIns[0]]['type'] == "B-Type"):
         # beq rs1, rs2, label
-        immediate = toBin(13, separatedIns[3])[::-1]
-        Instruction = immediate[12]+ space + immediate[5:10] + space + toBin(5, separatedIns[2])+ space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['funct3'] + space + immediate[1:4] + space + immediate[11] + space + inst_data[separatedIns[0]]['opcode'] 
+        immediate = toBin(13, separatedIns[3])
+        Instruction = immediate[0]+ space + immediate[2:8] + space + toBin(5, separatedIns[2])+ space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['funct3'] + space + immediate[8:12] + space + immediate[1] + space + inst_data[separatedIns[0]]['opcode'] 
     
     elif(inst_data[separatedIns[0]]['type'] == "U -Type"):
         # lui rd, immediate
-        immediate = toBin(32, separatedIns[2])[::-1]
-        Instruction = immediate[12:31] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
+        immediate = toBin(32, separatedIns[2])
+        Instruction = immediate[0:20] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
 
     elif(inst_data[separatedIns[0]]['type'] == "J-Type"):
         #jal rd, immediate
-        immediate = toBin(21, separatedIns[2])[::-1]
-        Instruction = immediate[20] + immediate[1:10]+ immediate[11] + immediate[12:19] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
+        immediate = toBin(21, separatedIns[2])
+        Instruction = immediate[0] + space + immediate[10:20]+ space +immediate[9] + space + immediate[1:9] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
         
 
     print(separatedIns[0], Instruction)
