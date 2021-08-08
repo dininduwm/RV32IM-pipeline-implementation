@@ -18,8 +18,8 @@ module data_cache_memory(
 );
     input				clock;
     input           	reset;
-    input           	read;
-    input           	write;
+    input[3:0]          read;
+    input[2:0]          write;
     input[31:0]      	address;
     input[31:0]     	writedata;
     output reg [31:0]	readdata;
@@ -36,7 +36,7 @@ module data_cache_memory(
     //Declare cache memory array 256x8-bits 
     reg [127:0] data_array [8:0];
     //Declare tag array 256x8-bits 
-    reg [2:0] tag_array [8:0];
+    reg [24:0] tag_array [8:0];
     //Declare valid bit array 256x8-bits 
     reg [1:0] dirtyBit_array [8:0];
     //Declare valid bit array 256x8-bits 
@@ -47,7 +47,7 @@ module data_cache_memory(
 
     // variables to handle state changes
     reg CURRENT_DIRTY, CURRENT_VALID;
-    reg [2:0] CURRENT_TAG;
+    reg [24:0] CURRENT_TAG;
     reg [127:0] CURRENT_DATA;
     wire TAG_MATCH;
 
@@ -60,7 +60,8 @@ module data_cache_memory(
     reg [127:0] MAIN_MEM_WRITE_DATA;
     wire [127:0] MAIN_MEM_READ_DATA;
     wire MAIN_MEM_BUSY_WAIT;
-
+    
+    reg [31:0]cache_readdata,  cache_writedata;
     reg readCache; // reg to remember the read to cache signal until the posedge
     reg writeCache; // reg to write the write cache signal until the posedge
 
@@ -71,12 +72,62 @@ module data_cache_memory(
     //        MAIN_MEM_WRITE_DATA, MAIN_MEM_READ_DATA, MAIN_MEM_BUSY_WAIT);
 
     // decoding the address
-    wire [2:0] tag, index;
-    wire [1:0] offset;
+    wire [24:0] tag;
+    wire [2:0] index;
+    wire [1:0] offset, byte_offset;
     
-    assign tag = address[31:5];
-    assign index = address[4:2];
-    assign offset = address[1:0];
+    assign tag = address[31:7];
+    assign index = address[6:4];
+    assign offset = address[3:2];
+    assign byte_offset = address[1:0];
+
+
+    
+    always @(*)
+    begin
+        case(read[2:0])
+            3'b000: // LB
+            case (byte_offset)
+                2'b00:
+                    readdata = {{24{cache_readdata[7]}}, cache_readdata[7:0]};
+                2'b01:
+                    readdata = {{24{cache_readdata[15]}}, cache_readdata[15:8]};
+                2'b10:
+                    readdata = {{24{cache_readdata[23]}}, cache_readdata[23:16]};
+                2'b11:
+                    readdata = {{24{cache_readdata[31]}}, cache_readdata[31:24]};
+            endcase
+            3'b001: // LH
+                case(byte_offset)
+                    2'b00:
+                        readdata = {{16{cache_readdata[15]}}, cache_readdata[15:0]};
+                    2'b10:
+                        readdata = {{16{cache_readdata[31]}}, cache_readdata[31:16]};
+                endcase
+            3'b010: // LW
+                readdata = cache_readdata;
+            3'b100: // LBU
+                case (byte_offset)
+                    2'b00:
+                        readdata = {24'b0, cache_readdata[7:0]};
+                    2'b01:
+                        readdata = {24'b0, cache_readdata[15:8]};
+                    2'b10:
+                        readdata = {24'b0, cache_readdata[23:16]};
+                    2'b11:
+                        readdata = {24'b0, cache_readdata[31:24]};
+                endcase
+            3'b101: // LHU
+                case(byte_offset)
+                    2'b00:
+                        readdata = {16'b0, cache_readdata[15:0]};
+                    2'b10:
+                        readdata = {16'b0, cache_readdata[31:16]};
+                endcase
+        endcase
+    end
+        
+
 
     // loading data 
     always @ (*)
@@ -103,13 +154,13 @@ module data_cache_memory(
             // fetching data
             case(offset)
                 2'b00:
-                    readdata = data_array[index][31:0];
+                    cache_readdata = data_array[index][31:0];
                 2'b01:
-                    readdata = data_array[index][63:32];
+                    cache_readdata = data_array[index][63:32];
                 2'b10:
-                    readdata = data_array[index][95:64];
+                    cache_readdata = data_array[index][95:64];
                 2'b11:
-                    readdata = data_array[index][127:96];
+                    cache_readdata = data_array[index][127:96];
             endcase
         end
     end
@@ -118,9 +169,9 @@ module data_cache_memory(
     reg readaccess, writeaccess;
     always @(read, write)
     begin
-        busywait = (read || write)? 1 : 0;
-        readaccess = (read && !write)? 1 : 0;
-        writeaccess = (!read && write)? 1 : 0;
+        busywait = (read[3] || write[2])? 1 : 0;
+        readaccess = (read[3] && !write[2])? 1 : 0;
+        writeaccess = (!read[3] && write[2])? 1 : 0;
     end
 
     // combinational next state logic
@@ -260,6 +311,56 @@ module data_cache_memory(
         end
     end
 
+    // calculating the byte mask
+    reg [31:0] write_mask;
+    always @ (*) 
+    begin
+        case (write[1:0])
+            2'b00: // SB
+                case(byte_offset)
+                    2'b00:
+                        begin
+                            write_mask = {{24{1'b1}}, 8'b0};
+                            cache_writedata = writedata;
+                        end
+                    2'b01:
+                        begin
+                            write_mask = {{16{1'b1}}, 8'b0, {8{1'b1}}};
+                            cache_writedata = writedata << 8;
+                        end
+                    2'b10:
+                        begin
+                            write_mask = {{8{1'b1}}, 8'b0, {16{1'b1}}};
+                            cache_writedata = writedata << 16;
+                        end
+                    2'b11:
+                        begin
+                            write_mask = {8'b0, {24{1'b1}}};
+                            cache_writedata = writedata << 24;
+                        end
+                endcase
+            2'b01: // SH
+                case(byte_offset)
+                    2'b00:
+                        begin
+                            write_mask = {{16{1'b1}}, 16'b0};    
+                            cache_writedata = writedata;
+                        end
+                    2'b10:
+                        begin
+                            write_mask = {16'b0, {16{1'b1}}};
+                            cache_writedata = writedata << 16;
+                        end
+                endcase
+                
+            2'b10: // SW
+                begin
+                    write_mask = 32'b0;
+                    cache_writedata = writedata;
+                end
+        endcase
+    end
+
     // to deassert and write back to the posedge
     always @ (posedge clock)
     begin
@@ -268,19 +369,34 @@ module data_cache_memory(
             busywait = 1'b0; // set the busy wait signal to zero     
             readCache = 1'b0; // pull the read signal to low
         end
-
+        
         if (writeCache) 
         begin
-            #1
             case(offset) // writing to the register
                 2'b00:
-                    data_array[index][7:0] = writedata;
+                    begin
+                        data_array[index][31:0] = (data_array[index][31:0] & write_mask);
+                        #1
+                        data_array[index][31:0] = (data_array[index][31:0] | cache_writedata);
+                    end
                 2'b01:
-                    data_array[index][15:8] = writedata;
+                    begin
+                        data_array[index][63:32] = (data_array[index][63:32] & write_mask);
+                        #1
+                        data_array[index][63:32] = (data_array[index][63:32] | cache_writedata);
+                    end
                 2'b10:
-                    data_array[index][23:16] = writedata;
+                    begin
+                        data_array[index][95:64] = (data_array[index][95:64] & write_mask);
+                        #1
+                        data_array[index][95:64] = (data_array[index][95:64] | cache_writedata);
+                    end
                 2'b11:
-                    data_array[index][31:24] = writedata;
+                    begin
+                        data_array[index][127:96] = ( data_array[index][127:96] & write_mask);
+                        #1
+                        data_array[index][127:96] = (data_array[index][127:96] | cache_writedata);
+                    end
             endcase
 
             dirtyBit_array[index] = 1'b1; // set the dirty bit because data is not consistant with the memory
