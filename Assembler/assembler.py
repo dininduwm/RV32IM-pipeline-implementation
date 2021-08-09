@@ -1,5 +1,6 @@
 import sys
 import csv
+import os
 
 # instruction sets grouped by the type
 inst_data = {}
@@ -11,6 +12,8 @@ argKeys = {'-i': 'inp_file', '-o': 'out_file'}
 
 # array to load the instructions
 Instructions = []
+# this dictionary is used to remember the position of the label
+labelPosition = {}
 
 def format(numOfDigits, num):
     return str(num).zfill(numOfDigits)[:numOfDigits]
@@ -72,7 +75,7 @@ def read_csv():
 # handling the separated instructions
 def handleInstruction(separatedIns):
     Instruction = None
-    space = ' ' # used to visualize the space in instruction in debug mode
+    space = '' # used to visualize the space in instruction in debug mode
 
     # handle R-Type instructions
     if(inst_data[separatedIns[0]]['type'] == "R-Type"):
@@ -105,6 +108,7 @@ def handleInstruction(separatedIns):
         
 
     print(separatedIns[0], Instruction)
+    saveToFile(Instruction)
 
 # taking the file name if passed as an argument
 def handleArgs():
@@ -116,15 +120,23 @@ def handleArgs():
 
 # opening the assemblyfile and reading through the file
 def handleInpFile():
+    global labelPosition
+
     if argList['inp_file'] == '':
         print('Input file not found')
         sys.exit(1)
 
     # opening the assembly file
     f = open(argList['inp_file'], "r")
+    # line count for the instructions
+    lineCount = 0
     # loop through the file and handle the instrctions separately
     for ins in f:
-        Instructions.append(ins)
+        if ins.strip()[-1] == ':':
+            labelPosition[ins.strip()[:(len(ins.strip())-1)]] = lineCount
+        else:
+            Instructions.append(ins)
+            lineCount += 1
         # handleInstruction(ins)
 
     # start the instruction formatting
@@ -141,14 +153,20 @@ def saveToFile(line):
         file = argList['out_file']
     # saving the new line to the output file
     f = open(file, "a")
-    f.write("Now the file has more content!")
+    f.write(line + "\n")
     f.close()
 
 
 if __name__ == "__main__":
+    # remove all .bin file in the directory
+    for i in os.listdir('.'):
+        if i.endswith(".bin"):
+            os.remove(i)
+
     #create the instruction disctionary
     read_csv()
     # handdle the argments
     handleArgs()
     # input file reding sequence
     handleInpFile()
+    print(labelPosition)
