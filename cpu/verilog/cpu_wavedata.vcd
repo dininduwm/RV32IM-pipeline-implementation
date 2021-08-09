@@ -1,0 +1,2136 @@
+$date
+	Mon Aug  9 22:21:31 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module testbenchCPU $end
+$var wire 1 ! MAIN_MEM_READ $end
+$var wire 3 " memWrite [2:0] $end
+$var wire 4 # memRead [3:0] $end
+$var wire 1 $ insReadEn $end
+$var wire 32 % WRITE_DATA [31:0] $end
+$var wire 32 & READ_DATA [31:0] $end
+$var wire 32 ' PC [31:0] $end
+$var wire 1 ( MAIN_M_READ $end
+$var wire 128 ) MAIN_MEM_WRITE_DATA [127:0] $end
+$var wire 1 * MAIN_MEM_WRITE $end
+$var wire 128 + MAIN_MEM_READ_DATA [127:0] $end
+$var wire 1 , MAIN_MEM_BUSY_WAIT $end
+$var wire 28 - MAIN_MEM_ADDRESS [27:0] $end
+$var wire 128 . INS_MEM_READ_DATA [127:0] $end
+$var wire 1 / INS_MEM_READ $end
+$var wire 1 0 INS_MEM_BUSY_WAIT $end
+$var wire 28 1 INS_MEM_ADDRESS [27:0] $end
+$var wire 1 2 INS_CACHE_BUSY_WAIT $end
+$var wire 32 3 INS [31:0] $end
+$var wire 1 4 BUSY_WAIT $end
+$var wire 32 5 ADDRESS [31:0] $end
+$var reg 1 6 CLK $end
+$var reg 1 7 RESET $end
+$scope module myCacheMemory $end
+$var wire 1 8 TAG_MATCH $end
+$var wire 1 6 clock $end
+$var wire 1 7 reset $end
+$var wire 32 9 writedata [31:0] $end
+$var wire 3 : write [2:0] $end
+$var wire 25 ; tag [24:0] $end
+$var wire 4 < read [3:0] $end
+$var wire 2 = offset [1:0] $end
+$var wire 3 > index [2:0] $end
+$var wire 2 ? byte_offset [1:0] $end
+$var wire 32 @ address [31:0] $end
+$var wire 128 A MAIN_MEM_READ_DATA [127:0] $end
+$var wire 1 , MAIN_MEM_BUSY_WAIT $end
+$var reg 128 B CURRENT_DATA [127:0] $end
+$var reg 1 C CURRENT_DIRTY $end
+$var reg 25 D CURRENT_TAG [24:0] $end
+$var reg 1 E CURRENT_VALID $end
+$var reg 28 F MAIN_MEM_ADDRESS [27:0] $end
+$var reg 1 ( MAIN_MEM_READ $end
+$var reg 1 * MAIN_MEM_WRITE $end
+$var reg 128 G MAIN_MEM_WRITE_DATA [127:0] $end
+$var reg 1 4 busywait $end
+$var reg 32 H cache_readdata [31:0] $end
+$var reg 32 I cache_writedata [31:0] $end
+$var reg 2 J next_state [1:0] $end
+$var reg 1 K readCache $end
+$var reg 1 L readaccess $end
+$var reg 32 M readdata [31:0] $end
+$var reg 2 N state [1:0] $end
+$var reg 1 O writeCache $end
+$var reg 1 P writeCache_mem $end
+$var reg 32 Q write_mask [31:0] $end
+$var reg 1 R writeaccess $end
+$var integer 32 S i [31:0] $end
+$upscope $end
+$scope module myDataMem $end
+$var wire 28 T address [27:0] $end
+$var wire 1 6 clock $end
+$var wire 1 ! read $end
+$var wire 1 7 reset $end
+$var wire 1 * write $end
+$var wire 128 U writedata [127:0] $end
+$var reg 1 , busywait $end
+$var reg 1 V readaccess $end
+$var reg 128 W readdata [127:0] $end
+$var reg 1 X writeaccess $end
+$var integer 32 Y i [31:0] $end
+$upscope $end
+$scope module myInsCacheMemory $end
+$var wire 1 Z TAG_MATCH $end
+$var wire 1 6 clock $end
+$var wire 1 7 reset $end
+$var wire 3 [ tag [2:0] $end
+$var wire 1 $ read $end
+$var wire 2 \ offset [1:0] $end
+$var wire 3 ] index [2:0] $end
+$var wire 32 ^ address [31:0] $end
+$var wire 128 _ MAIN_MEM_READ_DATA [127:0] $end
+$var wire 1 0 MAIN_MEM_BUSY_WAIT $end
+$var reg 32 ` CURRENT_DATA [31:0] $end
+$var reg 3 a CURRENT_TAG [2:0] $end
+$var reg 1 b CURRENT_VALID $end
+$var reg 28 c MAIN_MEM_ADDRESS [27:0] $end
+$var reg 1 / MAIN_MEM_READ $end
+$var reg 1 2 busywait $end
+$var reg 2 d next_state [1:0] $end
+$var reg 1 e readCache $end
+$var reg 1 f readaccess $end
+$var reg 32 g readdata [31:0] $end
+$var reg 2 h state [1:0] $end
+$var reg 1 i writeCache_mem $end
+$var integer 32 j i [31:0] $end
+$upscope $end
+$scope module myInsMem $end
+$var wire 28 k address [27:0] $end
+$var wire 1 6 clock $end
+$var wire 1 / read $end
+$var reg 1 0 busywait $end
+$var reg 1 l readaccess $end
+$var reg 128 m readdata [127:0] $end
+$upscope $end
+$scope module mycpu $end
+$var wire 1 6 CLK $end
+$var wire 1 4 DATA_CACHE_BUSY_WAIT $end
+$var wire 32 n DATA_CACHE_DATA [31:0] $end
+$var wire 32 o DATA_CACHE_READ_DATA [31:0] $end
+$var wire 32 p INSTRUCTION [31:0] $end
+$var wire 1 2 INS_CACHE_BUSY_WAIT $end
+$var wire 1 7 RESET $end
+$var wire 4 q memReadEn [3:0] $end
+$var wire 3 r memWriteEn [2:0] $end
+$var wire 2 s REG_WRITE_SELECT_S2 [1:0] $end
+$var wire 1 t REG_WRITE_EN_S2 $end
+$var wire 32 u REG_WRITE_DATA [31:0] $end
+$var wire 32 v PC_PLUS_4_2 [31:0] $end
+$var wire 32 w PC_PLUS_4 [31:0] $end
+$var wire 32 x PC_NEXT [31:0] $end
+$var wire 1 y OPERAND2_SEL $end
+$var wire 1 z OPERAND1_SEL $end
+$var wire 3 { MEM_WRITE_S2 [2:0] $end
+$var wire 4 | MEM_READ_S2 [3:0] $end
+$var wire 4 } IMMEDIATE_SELECT [3:0] $end
+$var wire 32 ~ IMMEDIATE_OUT_S2 [31:0] $end
+$var wire 32 !" DATA_CACHE_ADDR [31:0] $end
+$var wire 32 "" DATA2_S2 [31:0] $end
+$var wire 32 #" DATA1_S2 [31:0] $end
+$var wire 1 $" BRANCH_SELECT_OUT $end
+$var wire 4 %" BRANCH_SELECT [3:0] $end
+$var wire 5 &" ALU_SELECT [4:0] $end
+$var wire 32 '" ALU_OUT [31:0] $end
+$var wire 32 (" ALU_IN_2 [31:0] $end
+$var wire 32 )" ALU_IN_1 [31:0] $end
+$var reg 32 *" PC [31:0] $end
+$var reg 32 +" PR_ALU_OUT_S3 [31:0] $end
+$var reg 32 ," PR_ALU_OUT_S4 [31:0] $end
+$var reg 5 -" PR_ALU_SELECT [4:0] $end
+$var reg 4 ." PR_BRANCH_SELECT_S2 [3:0] $end
+$var reg 32 /" PR_DATA_1_S2 [31:0] $end
+$var reg 32 0" PR_DATA_2_S2 [31:0] $end
+$var reg 32 1" PR_DATA_2_S3 [31:0] $end
+$var reg 32 2" PR_DATA_CACHE_OUT [31:0] $end
+$var reg 32 3" PR_IMMEDIATE_SELECT_OUT [31:0] $end
+$var reg 32 4" PR_INSTRUCTION [31:0] $end
+$var reg 4 5" PR_MEM_READ_S2 [3:0] $end
+$var reg 4 6" PR_MEM_READ_S3 [3:0] $end
+$var reg 3 7" PR_MEM_WRITE_S2 [2:0] $end
+$var reg 3 8" PR_MEM_WRITE_S3 [2:0] $end
+$var reg 1 9" PR_OPERAND1_SEL $end
+$var reg 1 :" PR_OPERAND2_SEL $end
+$var reg 32 ;" PR_PC_S1 [31:0] $end
+$var reg 32 <" PR_PC_S2 [31:0] $end
+$var reg 32 =" PR_PC_S3 [31:0] $end
+$var reg 32 >" PR_PC_S4 [31:0] $end
+$var reg 5 ?" PR_REGISTER_WRITE_ADDR_S2 [4:0] $end
+$var reg 5 @" PR_REGISTER_WRITE_ADDR_S3 [4:0] $end
+$var reg 5 A" PR_REGISTER_WRITE_ADDR_S4 [4:0] $end
+$var reg 1 B" PR_REG_WRITE_EN_S2 $end
+$var reg 1 C" PR_REG_WRITE_EN_S3 $end
+$var reg 1 D" PR_REG_WRITE_EN_S4 $end
+$var reg 2 E" PR_REG_WRITE_SELECT_S2 [1:0] $end
+$var reg 2 F" PR_REG_WRITE_SELECT_S3 [1:0] $end
+$var reg 2 G" PR_REG_WRITE_SELECT_S4 [1:0] $end
+$var reg 1 $ insReadEn $end
+$scope module muxjump $end
+$var wire 32 H" INPUT1 [31:0] $end
+$var wire 1 $" SELECT $end
+$var wire 32 I" INPUT2 [31:0] $end
+$var reg 32 J" RESULT [31:0] $end
+$upscope $end
+$scope module myAlu $end
+$var wire 32 K" INTER_AND [31:0] $end
+$var wire 32 L" INTER_FWD [31:0] $end
+$var wire 32 M" INTER_OR [31:0] $end
+$var wire 32 N" INTER_XOR [31:0] $end
+$var wire 5 O" SELECT [4:0] $end
+$var wire 32 P" INTER_SUB [31:0] $end
+$var wire 32 Q" INTER_SRL [31:0] $end
+$var wire 32 R" INTER_SRA [31:0] $end
+$var wire 32 S" INTER_SLTU [31:0] $end
+$var wire 32 T" INTER_SLT [31:0] $end
+$var wire 32 U" INTER_SLL [31:0] $end
+$var wire 32 V" INTER_REMU [31:0] $end
+$var wire 32 W" INTER_REM [31:0] $end
+$var wire 32 X" INTER_MULHU [31:0] $end
+$var wire 32 Y" INTER_MULHSU [31:0] $end
+$var wire 32 Z" INTER_MUL [31:0] $end
+$var wire 32 [" INTER_DIV [31:0] $end
+$var wire 32 \" INTER_ADD [31:0] $end
+$var wire 32 ]" DATA2 [31:0] $end
+$var wire 32 ^" DATA1 [31:0] $end
+$var reg 32 _" RESULT [31:0] $end
+$upscope $end
+$scope module myBranchSelect $end
+$var wire 32 `" DATA1 [31:0] $end
+$var wire 32 a" DATA2 [31:0] $end
+$var wire 4 b" SELECT [3:0] $end
+$var wire 1 c" BNE $end
+$var wire 1 d" BLTU $end
+$var wire 1 e" BLT $end
+$var wire 1 f" BGEU $end
+$var wire 1 g" BGE $end
+$var wire 1 h" BEQ $end
+$var reg 1 $" MUX_OUT $end
+$upscope $end
+$scope module myControl $end
+$var wire 32 i" INSTRUCTION [31:0] $end
+$var wire 1 7 RESET $end
+$var wire 1 j" funct3_mux_select $end
+$var wire 1 z oparand_1_select $end
+$var wire 1 y oparand_2_select $end
+$var wire 1 t reg_file_write $end
+$var wire 2 k" reg_write_select [1:0] $end
+$var wire 7 l" opcode [6:0] $end
+$var wire 3 m" main_mem_write [2:0] $end
+$var wire 4 n" main_mem_read [3:0] $end
+$var wire 4 o" immediate_select [3:0] $end
+$var wire 7 p" funct7 [6:0] $end
+$var wire 3 q" funct3 [2:0] $end
+$var wire 4 r" branch_control [3:0] $end
+$var wire 5 s" alu_signal [4:0] $end
+$scope module funct3_mux $end
+$var wire 3 t" INPUT1 [2:0] $end
+$var wire 3 u" INPUT2 [2:0] $end
+$var wire 1 j" SELECT $end
+$var reg 3 v" RESULT [2:0] $end
+$upscope $end
+$upscope $end
+$scope module myImmediate $end
+$var wire 32 w" INST [31:0] $end
+$var wire 4 x" SELECT [3:0] $end
+$var wire 5 y" TYPE6 [4:0] $end
+$var wire 12 z" TYPE5 [11:0] $end
+$var wire 12 {" TYPE4 [11:0] $end
+$var wire 12 |" TYPE3 [11:0] $end
+$var wire 20 }" TYPE2 [19:0] $end
+$var wire 20 ~" TYPE1 [19:0] $end
+$var reg 32 !# OUT [31:0] $end
+$upscope $end
+$scope module myreg $end
+$var wire 1 6 CLK $end
+$var wire 5 "# INADDRESS [4:0] $end
+$var wire 32 ## OUT1 [31:0] $end
+$var wire 5 $# OUT1ADDRESS [4:0] $end
+$var wire 32 %# OUT2 [31:0] $end
+$var wire 5 &# OUT2ADDRESS [4:0] $end
+$var wire 1 7 RESET $end
+$var wire 1 D" WRITE $end
+$var wire 32 '# IN [31:0] $end
+$var integer 32 (# i [31:0] $end
+$upscope $end
+$scope module oparand1_mux $end
+$var wire 32 )# INPUT1 [31:0] $end
+$var wire 32 *# INPUT2 [31:0] $end
+$var wire 1 9" SELECT $end
+$var reg 32 +# RESULT [31:0] $end
+$upscope $end
+$scope module oparand2_mux $end
+$var wire 32 ,# INPUT1 [31:0] $end
+$var wire 32 -# INPUT2 [31:0] $end
+$var wire 1 :" SELECT $end
+$var reg 32 .# RESULT [31:0] $end
+$upscope $end
+$scope module regWriteSelMUX $end
+$var wire 32 /# INPUT1 [31:0] $end
+$var wire 32 0# INPUT2 [31:0] $end
+$var wire 32 1# INPUT3 [31:0] $end
+$var wire 32 2# INPUT4 [31:0] $end
+$var wire 2 3# SELECT [1:0] $end
+$var reg 32 4# RESULT [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 4#
+b0 3#
+b0 2#
+b0 1#
+b0 0#
+b0 /#
+b0 .#
+b0 -#
+b0 ,#
+b0 +#
+b0 *#
+b0 )#
+bx (#
+b0 '#
+bx &#
+bx %#
+bx $#
+bx ##
+b0 "#
+bx !#
+b0 ~"
+b0 }"
+b0 |"
+b0 {"
+b0 z"
+b0 y"
+bx x"
+b0 w"
+b0 v"
+b0 u"
+bx t"
+bx000 s"
+bx r"
+bx q"
+bx p"
+bx o"
+bx n"
+bx m"
+bx l"
+bx k"
+xj"
+bx i"
+1h"
+0g"
+0f"
+0e"
+0d"
+0c"
+b0 b"
+b0 a"
+b0 `"
+bx _"
+b0 ^"
+b0 ]"
+bx \"
+bx ["
+bx Z"
+bx Y"
+bx X"
+bx W"
+bx V"
+bx U"
+bx T"
+bx S"
+bx R"
+bx Q"
+bx P"
+b0 O"
+bx N"
+bx M"
+bx L"
+bx K"
+bx J"
+bx I"
+b0 H"
+b0 G"
+b0 F"
+b0 E"
+0D"
+0C"
+0B"
+b0 A"
+b0 @"
+b0 ?"
+b0 >"
+b0 ="
+b0 <"
+b0 ;"
+0:"
+09"
+b0 8"
+b0 7"
+b0 6"
+b0 5"
+b0 4"
+b0 3"
+b0 2"
+b0 1"
+b0 0"
+b0 /"
+b0 ."
+b0 -"
+b0 ,"
+b0 +"
+b11111111111111111111111111111100 *"
+b0 )"
+b0 ("
+bx '"
+bx000 &"
+bx %"
+x$"
+bx #"
+bx ""
+b0 !"
+bx ~
+bx }
+bx |
+bx {
+xz
+xy
+bx x
+b0 w
+b100 v
+b0 u
+xt
+bx s
+b0 r
+b0 q
+bx p
+bx o
+b0 n
+bx m
+0l
+bx k
+b1000 j
+xi
+b0 h
+bx g
+xf
+xe
+b0 d
+bx c
+xb
+bx a
+bx `
+bx _
+b11111111111111111111111111111100 ^
+b111 ]
+b11 \
+b111 [
+xZ
+b100000000 Y
+0X
+bx W
+0V
+bx U
+bx T
+b1000 S
+0R
+b11111111111111111111111100000000 Q
+xP
+xO
+b0 N
+bx M
+0L
+xK
+b0 J
+b0 I
+bx H
+bx G
+bx F
+xE
+bx D
+xC
+bx B
+bx A
+b0 @
+b0 ?
+b0 >
+b0 =
+b0 <
+b0 ;
+b0 :
+b0 9
+x8
+17
+16
+b0 5
+04
+bx 3
+02
+bx 1
+00
+x/
+bx .
+bx -
+0,
+bx +
+x*
+bx )
+x(
+b11111111111111111111111111111100 '
+bx &
+b0 %
+0$
+b0 #
+b0 "
+z!
+$end
+#10
+b0 B
+0C
+0E
+b0 `
+0b
+b0 L"
+07
+#20
+b100000 (#
+#30
+b0 x
+b0 J"
+b0 '"
+b0 I"
+b0 _"
+b0 N"
+b0 M"
+b0 K"
+b0 P"
+b0 \"
+b0 S"
+b0 T"
+#40
+b0 R"
+b0 Q"
+b0 U"
+06
+#80
+xR
+xL
+x4
+bx ("
+bx ]"
+bx .#
+b11111111111111111111111111111100 )"
+b11111111111111111111111111111100 ^"
+b11111111111111111111111111111100 +#
+bx ~"
+bx }"
+bx |"
+bx {"
+bx z"
+bx y"
+bx 2"
+bx 1#
+xD"
+bx G"
+bx 3#
+bx A"
+bx "#
+xC"
+bx F"
+bx "
+bx :
+bx r
+bx 8"
+bx #
+bx <
+bx q
+bx 6"
+bx %
+bx 9
+bx n
+bx 1"
+b0 v
+b11111111111111111111111111111100 ="
+bx @"
+xB"
+bx E"
+bx 7"
+bx 5"
+x:"
+x9"
+bx000 -"
+bx000 O"
+bx ."
+bx b"
+bx 3"
+bx -#
+bx 0"
+bx a"
+bx ,#
+xh"
+xc"
+xe"
+xg"
+xd"
+xf"
+bx /"
+bx `"
+bx )#
+b11111111111111111111111111111100 <"
+b11111111111111111111111111111100 *#
+bx ?"
+b11111111111111111111111111111100 ;"
+bx 4"
+bx w"
+16
+b0 Z"
+b0 X"
+b0 Y"
+#90
+bx L"
+#110
+b0x S"
+b0x T"
+bx N"
+b111111111111111111111111111111xx M"
+bx00 K"
+bx P"
+bx \"
+#120
+bx R"
+bx Q"
+bx U"
+06
+#160
+16
+bx Z"
+b0 V"
+b0 W"
+b1 ["
+b10000 X"
+b10000 Y"
+#200
+06
+#240
+16
+#280
+06
+#320
+16
+#360
+06
+#400
+16
+#440
+06
+#480
+16
+#520
+06
+#560
+16
+#600
+06
+#640
+16
+#680
+06
+#720
+16
+#760
+06
+#800
+16
+#840
+06
+#880
+16
+#920
+06
+#960
+16
+#1000
+06
+#1040
+16
+#1080
+06
+#1120
+16
+#1160
+06
+#1200
+16
+#1240
+06
+#1280
+16
+#1320
+06
+#1360
+16
+#1400
+06
+#1440
+16
+#1480
+06
+#1520
+16
+#1560
+06
+#1600
+16
+#1640
+06
+#1680
+16
+#1720
+06
+#1760
+16
+#1800
+06
+#1840
+16
+#1880
+06
+#1920
+16
+#1960
+06
+#2000
+16
+#2040
+06
+#2080
+16
+#2120
+06
+#2160
+16
+#2200
+06
+#2240
+16
+#2280
+06
+#2320
+16
+#2360
+06
+#2400
+16
+#2440
+06
+#2480
+16
+#2520
+06
+#2560
+16
+#2600
+06
+#2640
+16
+#2680
+06
+#2720
+16
+#2760
+06
+#2800
+16
+#2840
+06
+#2880
+16
+#2920
+06
+#2960
+16
+#3000
+06
+#3040
+16
+#3080
+06
+#3120
+16
+#3160
+06
+#3200
+16
+#3240
+06
+#3280
+16
+#3320
+06
+#3360
+16
+#3400
+06
+#3440
+16
+#3480
+06
+#3520
+16
+#3560
+06
+#3600
+16
+#3640
+06
+#3680
+16
+#3720
+06
+#3760
+16
+#3800
+06
+#3840
+16
+#3880
+06
+#3920
+16
+#3960
+06
+#4000
+16
+#4040
+06
+#4080
+16
+#4120
+06
+#4160
+16
+#4200
+06
+#4240
+16
+#4280
+06
+#4320
+16
+#4360
+06
+#4400
+16
+#4440
+06
+#4480
+16
+#4520
+06
+#4560
+16
+#4600
+06
+#4640
+16
+#4680
+06
+#4720
+16
+#4760
+06
+#4800
+16
+#4840
+06
+#4880
+16
+#4920
+06
+#4960
+16
+#5000
+06
+#5040
+16
+#5080
+06
+#5120
+16
+#5160
+06
+#5200
+16
+#5240
+06
+#5280
+16
+#5320
+06
+#5360
+16
+#5400
+06
+#5440
+16
+#5480
+06
+#5520
+16
+#5560
+06
+#5600
+16
+#5640
+06
+#5680
+16
+#5720
+06
+#5760
+16
+#5800
+06
+#5840
+16
+#5880
+06
+#5920
+16
+#5960
+06
+#6000
+16
+#6040
+06
+#6080
+16
+#6120
+06
+#6160
+16
+#6200
+06
+#6240
+16
+#6280
+06
+#6320
+16
+#6360
+06
+#6400
+16
+#6440
+06
+#6480
+16
+#6520
+06
+#6560
+16
+#6600
+06
+#6640
+16
+#6680
+06
+#6720
+16
+#6760
+06
+#6800
+16
+#6840
+06
+#6880
+16
+#6920
+06
+#6960
+16
+#7000
+06
+#7040
+16
+#7080
+06
+#7120
+16
+#7160
+06
+#7200
+16
+#7240
+06
+#7280
+16
+#7320
+06
+#7360
+16
+#7400
+06
+#7440
+16
+#7480
+06
+#7520
+16
+#7560
+06
+#7600
+16
+#7640
+06
+#7680
+16
+#7720
+06
+#7760
+16
+#7800
+06
+#7840
+16
+#7880
+06
+#7920
+16
+#7960
+06
+#8000
+16
+#8040
+06
+#8080
+16
+#8120
+06
+#8160
+16
+#8200
+06
+#8240
+16
+#8280
+06
+#8320
+16
+#8360
+06
+#8400
+16
+#8440
+06
+#8480
+16
+#8520
+06
+#8560
+16
+#8600
+06
+#8640
+16
+#8680
+06
+#8720
+16
+#8760
+06
+#8800
+16
+#8840
+06
+#8880
+16
+#8920
+06
+#8960
+16
+#9000
+06
+#9040
+16
+#9080
+06
+#9120
+16
+#9160
+06
+#9200
+16
+#9240
+06
+#9280
+16
+#9320
+06
+#9360
+16
+#9400
+06
+#9440
+16
+#9480
+06
+#9520
+16
+#9560
+06
+#9600
+16
+#9640
+06
+#9680
+16
+#9720
+06
+#9760
+16
+#9800
+06
+#9840
+16
+#9880
+06
+#9920
+16
+#9960
+06
+#10000
+16
+#10040
+06
+#10080
+16
+#10120
+06
+#10160
+16
+#10200
+06
+#10240
+16
+#10280
+06
+#10320
+16
+#10360
+06
+#10400
+16
+#10440
+06
+#10480
+16
+#10520
+06
+#10560
+16
+#10600
+06
+#10640
+16
+#10680
+06
+#10720
+16
+#10760
+06
+#10800
+16
+#10840
+06
+#10880
+16
+#10920
+06
+#10960
+16
+#11000
+06
+#11040
+16
+#11080
+06
+#11120
+16
+#11160
+06
+#11200
+16
+#11240
+06
+#11280
+16
+#11320
+06
+#11360
+16
+#11400
+06
+#11440
+16
+#11480
+06
+#11520
+16
+#11560
+06
+#11600
+16
+#11640
+06
+#11680
+16
+#11720
+06
+#11760
+16
+#11800
+06
+#11840
+16
+#11880
+06
+#11920
+16
+#11960
+06
+#12000
+16
+#12040
+06
+#12080
+16
+#12120
+06
+#12160
+16
+#12200
+06
+#12240
+16
+#12280
+06
+#12320
+16
+#12360
+06
+#12400
+16
+#12440
+06
+#12480
+16
+#12520
+06
+#12560
+16
+#12600
+06
+#12640
+16
+#12680
+06
+#12720
+16
+#12760
+06
+#12800
+16
+#12840
+06
+#12880
+16
+#12920
+06
+#12960
+16
+#13000
+06
+#13040
+16
+#13080
+06
+#13120
+16
+#13160
+06
+#13200
+16
+#13240
+06
+#13280
+16
+#13320
+06
+#13360
+16
+#13400
+06
+#13440
+16
+#13480
+06
+#13520
+16
+#13560
+06
+#13600
+16
+#13640
+06
+#13680
+16
+#13720
+06
+#13760
+16
+#13800
+06
+#13840
+16
+#13880
+06
+#13920
+16
+#13960
+06
+#14000
+16
+#14040
+06
+#14080
+16
+#14120
+06
+#14160
+16
+#14200
+06
+#14240
+16
+#14280
+06
+#14320
+16
+#14360
+06
+#14400
+16
+#14440
+06
+#14480
+16
+#14520
+06
+#14560
+16
+#14600
+06
+#14640
+16
+#14680
+06
+#14720
+16
+#14760
+06
+#14800
+16
+#14840
+06
+#14880
+16
+#14920
+06
+#14960
+16
+#15000
+06
+#15040
+16
+#15080
+06
+#15120
+16
+#15160
+06
+#15200
+16
+#15240
+06
+#15280
+16
+#15320
+06
+#15360
+16
+#15400
+06
+#15440
+16
+#15480
+06
+#15520
+16
+#15560
+06
+#15600
+16
+#15640
+06
+#15680
+16
+#15720
+06
+#15760
+16
+#15800
+06
+#15840
+16
+#15880
+06
+#15920
+16
+#15960
+06
+#16000
+16
+#16040
+06
+#16080
+16
+#16120
+06
+#16160
+16
+#16200
+06
+#16240
+16
+#16280
+06
+#16320
+16
+#16360
+06
+#16400
+16
+#16440
+06
+#16480
+16
+#16520
+06
+#16560
+16
+#16600
+06
+#16640
+16
+#16680
+06
+#16720
+16
+#16760
+06
+#16800
+16
+#16840
+06
+#16880
+16
+#16920
+06
+#16960
+16
+#17000
+06
+#17040
+16
+#17080
+06
+#17120
+16
+#17160
+06
+#17200
+16
+#17240
+06
+#17280
+16
+#17320
+06
+#17360
+16
+#17400
+06
+#17440
+16
+#17480
+06
+#17520
+16
+#17560
+06
+#17600
+16
+#17640
+06
+#17680
+16
+#17720
+06
+#17760
+16
+#17800
+06
+#17840
+16
+#17880
+06
+#17920
+16
+#17960
+06
+#18000
+16
+#18040
+06
+#18080
+16
+#18120
+06
+#18160
+16
+#18200
+06
+#18240
+16
+#18280
+06
+#18320
+16
+#18360
+06
+#18400
+16
+#18440
+06
+#18480
+16
+#18520
+06
+#18560
+16
+#18600
+06
+#18640
+16
+#18680
+06
+#18720
+16
+#18760
+06
+#18800
+16
+#18840
+06
+#18880
+16
+#18920
+06
+#18960
+16
+#19000
+06
+#19040
+16
+#19080
+06
+#19120
+16
+#19160
+06
+#19200
+16
+#19240
+06
+#19280
+16
+#19320
+06
+#19360
+16
+#19400
+06
+#19440
+16
+#19480
+06
+#19520
+16
+#19560
+06
+#19600
+16
+#19640
+06
+#19680
+16
+#19720
+06
+#19760
+16
+#19800
+06
+#19840
+16
+#19880
+06
+#19920
+16
+#19960
+06
+#20000
+16
+#20040
+06
+#20080
+16
+#20120
+06
+#20160
+16
+#20200
+06
+#20240
+16
+#20280
+06
+#20320
+16
+#20360
+06
+#20400
+16
+#20440
+06
+#20480
+16
+#20520
+06
+#20560
+16
+#20600
+06
+#20640
+16
+#20680
+06
+#20720
+16
+#20760
+06
+#20800
+16
+#20840
+06
+#20880
+16
+#20920
+06
+#20960
+16
+#21000
+06
+#21040
+16
+#21080
+06
+#21120
+16
+#21160
+06
+#21200
+16
+#21240
+06
+#21280
+16
+#21320
+06
+#21360
+16
+#21400
+06
+#21440
+16
+#21480
+06
+#21520
+16
+#21560
+06
+#21600
+16
+#21640
+06
+#21680
+16
+#21720
+06
+#21760
+16
+#21800
+06
+#21840
+16
+#21880
+06
+#21920
+16
+#21960
+06
+#22000
+16
+#22040
+06
+#22080
+16
+#22120
+06
+#22160
+16
+#22200
+06
+#22240
+16
+#22280
+06
+#22320
+16
+#22360
+06
+#22400
+16
+#22440
+06
+#22480
+16
+#22520
+06
+#22560
+16
+#22600
+06
+#22640
+16
+#22680
+06
+#22720
+16
+#22760
+06
+#22800
+16
+#22840
+06
+#22880
+16
+#22920
+06
+#22960
+16
+#23000
+06
+#23040
+16
+#23080
+06
+#23120
+16
+#23160
+06
+#23200
+16
+#23240
+06
+#23280
+16
+#23320
+06
+#23360
+16
+#23400
+06
+#23440
+16
+#23480
+06
+#23520
+16
+#23560
+06
+#23600
+16
+#23640
+06
+#23680
+16
+#23720
+06
+#23760
+16
+#23800
+06
+#23840
+16
+#23880
+06
+#23920
+16
+#23960
+06
+#24000
+16
+#24040
+06
+#24080
+16
+#24120
+06
+#24160
+16
+#24200
+06
+#24240
+16
+#24280
+06
+#24320
+16
+#24360
+06
+#24400
+16
+#24440
+06
+#24480
+16
+#24520
+06
+#24560
+16
+#24600
+06
+#24640
+16
+#24680
+06
+#24720
+16
+#24760
+06
+#24800
+16
+#24840
+06
+#24880
+16
+#24920
+06
+#24960
+16
+#25000
+06
+#25040
+16
+#25080
+06
+#25120
+16
+#25160
+06
+#25200
+16
+#25240
+06
+#25280
+16
+#25320
+06
+#25360
+16
+#25400
+06
+#25440
+16
+#25480
+06
+#25520
+16
+#25560
+06
+#25600
+16
+#25640
+06
+#25680
+16
+#25720
+06
+#25760
+16
+#25800
+06
+#25840
+16
+#25880
+06
+#25920
+16
+#25960
+06
+#26000
+16
+#26040
+06
+#26080
+16
+#26120
+06
+#26160
+16
+#26200
+06
+#26240
+16
+#26280
+06
+#26320
+16
+#26360
+06
+#26400
+16
+#26440
+06
+#26480
+16
+#26520
+06
+#26560
+16
+#26600
+06
+#26640
+16
+#26680
+06
+#26720
+16
+#26760
+06
+#26800
+16
+#26840
+06
+#26880
+16
+#26920
+06
+#26960
+16
+#27000
+06
+#27040
+16
+#27080
+06
+#27120
+16
+#27160
+06
+#27200
+16
+#27240
+06
+#27280
+16
+#27320
+06
+#27360
+16
+#27400
+06
+#27440
+16
+#27480
+06
+#27520
+16
+#27560
+06
+#27600
+16
+#27640
+06
+#27680
+16
+#27720
+06
+#27760
+16
+#27800
+06
+#27840
+16
+#27880
+06
+#27920
+16
+#27960
+06
+#28000
+16
+#28040
+06
+#28080
+16
+#28120
+06
+#28160
+16
+#28200
+06
+#28240
+16
+#28280
+06
+#28320
+16
+#28360
+06
+#28400
+16
+#28440
+06
+#28480
+16
+#28520
+06
+#28560
+16
+#28600
+06
+#28640
+16
+#28680
+06
+#28720
+16
+#28760
+06
+#28800
+16
+#28840
+06
+#28880
+16
+#28920
+06
+#28960
+16
+#29000
+06
+#29040
+16
+#29080
+06
+#29120
+16
+#29160
+06
+#29200
+16
+#29240
+06
+#29280
+16
+#29320
+06
+#29360
+16
+#29400
+06
+#29440
+16
+#29480
+06
+#29520
+16
+#29560
+06
+#29600
+16
+#29640
+06
+#29680
+16
+#29720
+06
+#29760
+16
+#29800
+06
+#29840
+16
+#29880
+06
+#29920
+16
+#29960
+06
+#30000
+16
+#30040
+06
+#30080
+16
+#30120
+06
+#30160
+16
+#30200
+06
+#30240
+16
+#30280
+06
+#30320
+16
+#30360
+06
+#30400
+16
+#30420

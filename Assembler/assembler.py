@@ -1,6 +1,7 @@
 import sys
 import csv
 import os
+import shutil
 
 # instruction sets grouped by the type
 inst_data = {}
@@ -14,6 +15,11 @@ argKeys = {'-i': 'inp_file', '-o': 'out_file'}
 Instructions = []
 # this dictionary is used to remember the position of the label
 labelPosition = {}
+
+# the instuction count the written to the file
+inst_count = 0
+
+FILE_SIZE = 1024
 
 def format(numOfDigits, num):
     return str(num).zfill(numOfDigits)[:numOfDigits]
@@ -148,13 +154,30 @@ def toBin(numOfDigits, num):
 
 # saving data to a .bin file
 def saveToFile(line):
+    global inst_count
     file = argList['inp_file'].split('.')[0] + '.bin'
     if not (argList['out_file'] == ''):
         file = argList['out_file']
     # saving the new line to the output file
     f = open(file, "a")
-    f.write(line + "\n")
+    for i in range(4):
+        f.write(line[(i*8):(i*8+8)] + "\n")
     f.close()
+    inst_count = inst_count + 1
+
+# fillig the rest of the file 
+def fillTheFile():
+    global FILE_SIZE
+    file = argList['inp_file'].split('.')[0] + '.bin'
+    if not (argList['out_file'] == ''):
+        file = argList['out_file']
+
+    f = open(file, "a")
+    for i in range(FILE_SIZE - (4*inst_count)):
+        f.write('x'*8 + '\n')
+
+    # # copy the bin file to the verilog folder
+    # shutil.copy2(file, )
 
 
 if __name__ == "__main__":
@@ -170,3 +193,7 @@ if __name__ == "__main__":
     # input file reding sequence
     handleInpFile()
     print(labelPosition)
+    # fill the rest of the bin file
+    fillTheFile()
+
+    

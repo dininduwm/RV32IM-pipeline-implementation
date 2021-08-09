@@ -15,30 +15,34 @@ module testbenchCPU;
     //input registers
     wire [31:0] INS;
     reg CLK, RESET; 
-    // reg [7:0] INST_MEMORY [1023:0] ; //instruction array
+    // reg [7:0] INST_MEMORY [0:1023] ; //instruction array
+    reg [7:0] INST_MEMORY [1023:0] ; //instruction array
 
     wire[31:0] PC;
 
-    wire memReadEn, memWriteEn; // memory read or write enable signals
-    wire [7:0] ADDRESS; // address of the data memory
-    wire [7:0] READ_DATA, WRITE_DATA; // read and write data of the memory module
+    wire [3:0] memRead;   // memory read 
+    wire [2:0] memWrite; // write enable 
+    wire [31:0] ADDRESS; // address of the data memory
+    wire [31:0] READ_DATA, WRITE_DATA; // read and write data of the memory module
+    // TODO: Busy wait signal should be implemented in CPU
     wire BUSY_WAIT; // busy wait signal of the CPU
 
     // connections to connect main memory to the cache memory
     wire              MAIN_MEM_READ;
     wire              MAIN_MEM_WRITE;
-    wire[5:0]         MAIN_MEM_ADDRESS;
-    wire[31:0]        MAIN_MEM_WRITE_DATA;
-    wire[31:0]        MAIN_MEM_READ_DATA;
+    wire[27:0]        MAIN_MEM_ADDRESS;
+    wire[127:0]       MAIN_MEM_WRITE_DATA;
+    wire[127:0]       MAIN_MEM_READ_DATA;
     wire              MAIN_MEM_BUSY_WAIT;
 
     wire              INS_CACHE_BUSY_WAIT;
     wire insReadEn; // read enable for the instruction memory
     
-    cpu mycpu(PC, INS, CLK, RESET, memReadEn, memWriteEn, ADDRESS, WRITE_DATA, READ_DATA, BUSY_WAIT, 
+    cpu mycpu(PC, INS, CLK, RESET, memRead, memWrite, ADDRESS, WRITE_DATA, READ_DATA, BUSY_WAIT, 
                 insReadEn, INS_CACHE_BUSY_WAIT); //initialize the cpu
-    data_cache_memory myCacheMemory(CLK, RESET, memReadEn, memWriteEn, ADDRESS, WRITE_DATA, READ_DATA, BUSY_WAIT,
-              MAIN_MEM_READ, 
+                
+    data_cache_memory myCacheMemory(CLK, RESET, memRead, memWrite, ADDRESS, WRITE_DATA, READ_DATA, BUSY_WAIT,
+              MAIN_M_READ, 
               MAIN_MEM_WRITE, 
               MAIN_MEM_ADDRESS,
               MAIN_MEM_WRITE_DATA, 
@@ -50,7 +54,7 @@ module testbenchCPU;
 
     // connections to the instruction memory
     wire              INS_MEM_READ;
-    wire[5:0]         INS_MEM_ADDRESS;
+    wire[27:0]        INS_MEM_ADDRESS;
     wire[127:0]       INS_MEM_READ_DATA;
     wire              INS_MEM_BUSY_WAIT;
 
@@ -79,6 +83,8 @@ module testbenchCPU;
        
     initial
     begin
+        // load the instructions from the register file
+        $readmemb("test_prog.bin", INST_MEMORY); 
         /*
          // loadi 0 0x0A
         {INST_MEMORY[3],INST_MEMORY[2],INST_MEMORY[1],INST_MEMORY[0]}     = 32'b00000101_00000000_00000000_00001010;

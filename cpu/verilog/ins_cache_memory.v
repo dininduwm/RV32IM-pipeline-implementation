@@ -21,7 +21,7 @@ module ins_cache_memory(
 
     // main memory input outputs
     output              MAIN_MEM_READ;
-    output[5:0]         MAIN_MEM_ADDRESS;
+    output[27:0]        MAIN_MEM_ADDRESS;
     input[127:0]        MAIN_MEM_READ_DATA;
     input               MAIN_MEM_BUSY_WAIT;
 
@@ -46,7 +46,7 @@ module ins_cache_memory(
 
     // variables to hold the values of the memory module
     reg MAIN_MEM_READ;
-    reg [5:0] MAIN_MEM_ADDRESS;
+    reg [27:0] MAIN_MEM_ADDRESS;
     wire [127:0] MAIN_MEM_READ_DATA;
     wire MAIN_MEM_BUSY_WAIT;
 
