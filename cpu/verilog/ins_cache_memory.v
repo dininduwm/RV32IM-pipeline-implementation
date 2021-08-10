@@ -186,6 +186,7 @@ module ins_cache_memory(
             state = next_state;
         else
             begin
+                // set the busy wait signal to 0
                 state = IDLE;
                 next_state = IDLE;
             end

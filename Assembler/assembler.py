@@ -160,7 +160,7 @@ def saveToFile(line):
         file = argList['out_file']
     # saving the new line to the output file
     f = open(file, "a")
-    for i in range(4):
+    for i in range(3, -1, -1):
         f.write(line[(i*8):(i*8+8)] + "\n")
     f.close()
     inst_count = inst_count + 1

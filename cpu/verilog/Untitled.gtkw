@@ -1,0 +1,122 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Tue Aug 10 17:45:12 2021
+[*]
+[dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/cpu_wavedata.vcd"
+[dumpfile_mtime] "Tue Aug 10 17:43:44 2021"
+[dumpfile_size] 31431
+[savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/Untitled.gtkw"
+[timestart] 1442900
+[size] 1920 1027
+[pos] -1 -1
+*-15.557479 1539800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbenchCPU.
+[treeopen] testbenchCPU.mycpu.
+[sst_width] 307
+[signals_width] 366
+[sst_expanded] 1
+[sst_vpaned_height] 317
+@28
+testbenchCPU.mycpu.INS_CACHE_BUSY_WAIT
+testbenchCPU.mycpu.DATA_CACHE_BUSY_WAIT
+testbenchCPU.mycpu.RESET
+@22
+testbenchCPU.INS[31:0]
+@28
+testbenchCPU.mycpu.CLK
+@22
+testbenchCPU.mycpu.PC[31:0]
+testbenchCPU.mycpu.INSTRUCTION[31:0]
+testbenchCPU.mycpu.ALU_IN_1[31:0]
+testbenchCPU.mycpu.ALU_IN_2[31:0]
+@200
+-
+-INS CACHE
+@22
+testbenchCPU.myInsCacheMemory.CURRENT_DATA[31:0]
+testbenchCPU.myInsMem.readdata[127:0]
+@200
+-
+-Oparand 2 Select MUX
+@22
+testbenchCPU.mycpu.oparand2_mux.INPUT1[31:0]
+testbenchCPU.mycpu.oparand2_mux.INPUT2[31:0]
+testbenchCPU.mycpu.oparand2_mux.RESULT[31:0]
+@28
+testbenchCPU.mycpu.oparand2_mux.SELECT
+@200
+-
+-Immediate Select Unit
+@22
+testbenchCPU.mycpu.myImmediate.INST[31:0]
+testbenchCPU.mycpu.myImmediate.OUT[31:0]
+testbenchCPU.mycpu.myImmediate.SELECT[3:0]
+@200
+-
+-ALU
+@22
+testbenchCPU.mycpu.myAlu.DATA1[31:0]
+testbenchCPU.mycpu.myAlu.DATA2[31:0]
+testbenchCPU.mycpu.myAlu.RESULT[31:0]
+@200
+-
+-REGISTER FILE
+@22
+testbenchCPU.mycpu.myreg.OUT1ADDRESS[4:0]
+testbenchCPU.mycpu.myreg.OUT1[31:0]
+testbenchCPU.mycpu.myreg.OUT2ADDRESS[4:0]
+testbenchCPU.mycpu.myreg.OUT2[31:0]
+testbenchCPU.mycpu.myreg.INADDRESS[4:0]
+testbenchCPU.mycpu.myreg.IN[31:0]
+@28
+testbenchCPU.mycpu.myreg.WRITE
+@200
+-
+@28
+testbenchCPU.mycpu.CLK
+@200
+-Stage 1 Pipeline Reg
+@22
+testbenchCPU.mycpu.PR_INSTRUCTION[31:0]
+@200
+-Stage 2 Pipeline Reg
+@28
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S2
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S2[1:0]
+@22
+testbenchCPU.mycpu.PR_DATA_1_S2[31:0]
+testbenchCPU.mycpu.PR_DATA_2_S2[31:0]
+testbenchCPU.mycpu.PR_IMMEDIATE_SELECT_OUT[31:0]
+testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S2[4:0]
+testbenchCPU.mycpu.IMMEDIATE_OUT_S2[31:0]
+@200
+-
+-Stage 3 Pipeline Reg
+@28
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S3
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S3[1:0]
+@22
+testbenchCPU.mycpu.PR_ALU_OUT_S3[31:0]
+testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S3[4:0]
+@200
+-
+-Stage 4 Pipeline Reg
+@28
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S4
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S4[1:0]
+@22
+testbenchCPU.mycpu.PR_ALU_OUT_S4[31:0]
+testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S4[4:0]
+@200
+-
+-REG Write Select MUX
+@22
+testbenchCPU.mycpu.regWriteSelMUX.INPUT1[31:0]
+testbenchCPU.mycpu.regWriteSelMUX.INPUT2[31:0]
+testbenchCPU.mycpu.regWriteSelMUX.INPUT3[31:0]
+testbenchCPU.mycpu.regWriteSelMUX.INPUT4[31:0]
+testbenchCPU.mycpu.regWriteSelMUX.RESULT[31:0]
+@28
+testbenchCPU.mycpu.regWriteSelMUX.SELECT[1:0]
+[pattern_trace] 1
+[pattern_trace] 0

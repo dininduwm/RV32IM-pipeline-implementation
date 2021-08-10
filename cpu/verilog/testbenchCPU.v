@@ -16,7 +16,7 @@ module testbenchCPU;
     wire [31:0] INS;
     reg CLK, RESET; 
     // reg [7:0] INST_MEMORY [0:1023] ; //instruction array
-    reg [7:0] INST_MEMORY [1023:0] ; //instruction array
+    reg [7:0] INST_MEMORY [0:1023] ; //instruction array
 
     wire[31:0] PC;
 
@@ -84,7 +84,7 @@ module testbenchCPU;
     initial
     begin
         // load the instructions from the register file
-        $readmemb("test_prog.bin", INST_MEMORY); 
+        
         /*
          // loadi 0 0x0A
         {INST_MEMORY[3],INST_MEMORY[2],INST_MEMORY[1],INST_MEMORY[0]}     = 32'b00000101_00000000_00000000_00001010;
@@ -158,12 +158,7 @@ module testbenchCPU;
         // assign values with time to input signals to see output 
         RESET = 1'b1;
 
-        #1
-        RESET = 1'b0;
-
-        #37
-        RESET = 1'b0;
-        #4
+        #25
         RESET = 1'b0;
 
         #3000
@@ -173,7 +168,7 @@ module testbenchCPU;
     // clock signal generation
     always
     begin
-      #4 CLK = ~CLK;
+      #10 CLK = ~CLK;
     end              
 
 endmodule

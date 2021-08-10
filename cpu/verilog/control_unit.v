@@ -88,11 +88,11 @@ module control_unit(INSTRUCTION, alu_signal, reg_file_write, main_mem_write, mai
     // always @ (*) //if reset set the pc select
     // begin
     //   if (RESET) 
-    //   begin
-    //     jump = 1'b0;
-    //     beq = 1'b0;
-    //     bne = 1'b0;
-    //   end
+    //     begin
+    //         jump = 1'b0;
+    //         beq = 1'b0;
+    //         bne = 1'b0;
+    //     end
     // end
 
 endmodule 

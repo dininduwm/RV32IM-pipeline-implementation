@@ -7,10 +7,10 @@ module mux2to1_32bit(INPUT1, INPUT2, RESULT, SELECT);
 
     always @(*)
     begin
-      if (SELECT == 1'b0)  //selecting according to the select signal
-            RESULT = INPUT1;
-      else 
+      if (SELECT == 1'b1)  //selecting according to the select signal
             RESULT = INPUT2;
+      else 
+            RESULT = INPUT1;
     end
 
 endmodule

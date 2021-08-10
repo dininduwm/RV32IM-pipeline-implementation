@@ -169,7 +169,11 @@ module data_cache_memory(
     reg readaccess, writeaccess;
     always @(read, write)
     begin
-        busywait = (read[3] || write[2])? 1 : 0;
+        //TODO changed to handle undefined state
+        if (!(read[3] == 1'bx || write[2] == 1'bx))
+            busywait = (read[3] || write[2])? 1 : 0;
+        else
+            busywait = 1'b0;
         readaccess = (read[3] && !write[2])? 1 : 0;
         writeaccess = (!read[3] && write[2])? 1 : 0;
     end

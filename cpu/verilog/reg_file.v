@@ -19,7 +19,7 @@ begin
     // write input to the in address
     
     // TODO : set the time delay
-    #2
+    #0.001
     
     if (WRITE == 1'b1)
     begin

@@ -19,7 +19,7 @@ assign TYPE4 = {INST[31:25], INST[11:7]};
 assign TYPE5 = {INST[31:25], INST[11:7]};
 assign TYPE6 = INST[29:25]; 
 
-always @(SELECT) begin
+always @(*) begin
     case (SELECT[2:0])
         // TYPE 1 
         3'b000:

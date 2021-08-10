@@ -1,10 +1,9 @@
-add 3,4, 5
-sub 3, 4, 5
-addi 6, 3, 34
-sw 5 ,8(x6)
-beq x19, x10, 156
-Test: 
-lui x12, 321321316541
-jal x12, 32132
-Teste:   
-jal x12, 32132
+addi x0, x1, 5
+addi x1, x1, 6
+addi x3, x0, 1
+addi x3, x0, 1
+addi x3, x0, 1
+addi x3, x0, 1
+addi x3, x0, 1
+addi x3, x0, 1
+add x2, x0, x1

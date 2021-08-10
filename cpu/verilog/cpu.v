@@ -71,15 +71,15 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
                         DATA1_S2, 
                         DATA2_S2, 
                         PR_REGISTER_WRITE_ADDR_S4, 
-                        INSTRUCTION[19:15], 
-                        INSTRUCTION[24:20], 
+                        PR_INSTRUCTION[19:15], 
+                        PR_INSTRUCTION[24:20], 
                         PR_REG_WRITE_EN_S4, 
                         CLK, 
                         RESET); //alu module
 
         immediate_select myImmediate (PR_INSTRUCTION, IMMEDIATE_SELECT, IMMEDIATE_OUT_S2);
         
-        control_unit myControl (INSTRUCTION, 
+        control_unit myControl (PR_INSTRUCTION, 
                                 ALU_SELECT, 
                                 REG_WRITE_EN_S2, 
                                 MEM_WRITE_S2, 
@@ -152,13 +152,33 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
 
 // register updating section
 always @(posedge CLK) begin
+    #0.02
     if (!(DATA_CACHE_BUSY_WAIT || INS_CACHE_BUSY_WAIT))
     begin
-        //************************** STAGE 1 **************************
-        PR_INSTRUCTION = INSTRUCTION;
-        PR_PC_S1 = PC;
+        //************************** STAGE 4 **************************
+        PR_REGISTER_WRITE_ADDR_S4 = PR_REGISTER_WRITE_ADDR_S3;
+        PR_PC_S4 = PC_PLUS_4_2;
+        
+        PR_REG_WRITE_SELECT_S4  = PR_REG_WRITE_SELECT_S3;
+        PR_REG_WRITE_EN_S4 = PR_REG_WRITE_EN_S3;
 
-        //************************** STAGE 2 **************************    
+        PR_ALU_OUT_S4 = PR_ALU_OUT_S3;
+        PR_DATA_CACHE_OUT = DATA_CACHE_READ_DATA;
+        
+        //************************** STAGE 3 **************************
+        #0.001
+        PR_REGISTER_WRITE_ADDR_S3 = PR_REGISTER_WRITE_ADDR_S2;
+        PR_PC_S3 = PR_PC_S2;
+        PR_ALU_OUT_S3 = ALU_OUT;
+        PR_DATA_2_S3 = PR_DATA_1_S2;    
+        
+        PR_MEM_READ_S3 = PR_MEM_READ_S2;
+        PR_MEM_WRITE_S3 = PR_MEM_WRITE_S2;
+        PR_REG_WRITE_SELECT_S3  = PR_REG_WRITE_SELECT_S2;
+        PR_REG_WRITE_EN_S3 = PR_REG_WRITE_EN_S2;
+
+        //************************** STAGE 2 **************************  
+        #0.001  
         PR_REGISTER_WRITE_ADDR_S2 = PR_INSTRUCTION[11:7]; // TODO: check the 11:7 value
         PR_PC_S2 = PR_PC_S1;
         PR_DATA_1_S2 = DATA1_S2;
@@ -174,28 +194,10 @@ always @(posedge CLK) begin
         PR_REG_WRITE_SELECT_S2 = REG_WRITE_SELECT_S2;
         PR_REG_WRITE_EN_S2 = REG_WRITE_EN_S2; 
 
-        //************************** STAGE 3 **************************
-        PR_REGISTER_WRITE_ADDR_S3 = PR_REGISTER_WRITE_ADDR_S2;
-        PR_PC_S3 = PR_PC_S2;
-        PR_ALU_OUT_S3 = ALU_OUT;
-        PR_DATA_2_S3 = PR_DATA_1_S2;    
-        
-        PR_MEM_READ_S3 = PR_MEM_READ_S2;
-        PR_MEM_WRITE_S3 = PR_MEM_WRITE_S2;
-        PR_REG_WRITE_SELECT_S3  = PR_REG_WRITE_SELECT_S2;
-        PR_REG_WRITE_EN_S3 = PR_REG_WRITE_EN_S2;
-
-
-        //************************** STAGE 4 **************************
-        PR_REGISTER_WRITE_ADDR_S4 = PR_REGISTER_WRITE_ADDR_S3;
-        PR_PC_S4 = PC_PLUS_4_2;
-        
-        PR_REG_WRITE_SELECT_S4  = PR_REG_WRITE_SELECT_S3;
-        PR_REG_WRITE_EN_S4 = PR_REG_WRITE_EN_S3;
-
-
-        PR_ALU_OUT_S4 = PR_ALU_OUT_S3;
-        PR_DATA_CACHE_OUT = DATA_CACHE_READ_DATA;
+        //************************** STAGE 1 **************************
+        #0.001
+        PR_INSTRUCTION = INSTRUCTION;
+        PR_PC_S1 = PC;
     end
 
 end
