@@ -1,0 +1,53 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Thu Aug 12 15:26:31 2021
+[*]
+[dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/cpu_wavedata.vcd"
+[dumpfile_mtime] "Thu Aug 12 12:07:01 2021"
+[dumpfile_size] 32770
+[savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/ContrlSignl Propagation through Pipeling.gtkw"
+[timestart] 2245500
+[size] 1920 1027
+[pos] -1 -1
+*-15.560253 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbenchCPU.
+[sst_width] 276
+[signals_width] 262
+[sst_expanded] 1
+[sst_vpaned_height] 308
+@28
+testbenchCPU.CLK
+@200
+-
+-Pipeline Stage 1
+-
+-Pipeline Stage 2
+@22
+testbenchCPU.mycpu.PR_BRANCH_SELECT_S2[3:0]
+testbenchCPU.mycpu.PR_ALU_SELECT[4:0]
+@28
+testbenchCPU.mycpu.PR_OPERAND1_SEL
+testbenchCPU.mycpu.PR_OPERAND2_SEL
+@22
+testbenchCPU.mycpu.PR_MEM_READ_S2[3:0]
+@28
+testbenchCPU.mycpu.PR_MEM_WRITE_S2[2:0]
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S2[1:0]
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S2
+@200
+-
+-Pipeline Stage 3
+@22
+testbenchCPU.mycpu.PR_MEM_READ_S3[3:0]
+@28
+testbenchCPU.mycpu.PR_MEM_WRITE_S3[2:0]
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S3[1:0]
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S3
+@200
+-
+-Pipeline Stage 4
+@28
+testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S4[1:0]
+testbenchCPU.mycpu.PR_REG_WRITE_EN_S4
+[pattern_trace] 1
+[pattern_trace] 0

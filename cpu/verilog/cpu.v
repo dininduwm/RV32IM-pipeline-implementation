@@ -156,12 +156,11 @@ always @(posedge CLK) begin
         //************************** STAGE 4 **************************
         PR_REGISTER_WRITE_ADDR_S4 = PR_REGISTER_WRITE_ADDR_S3;
         PR_PC_S4 = PR_PC_S3;
+        PR_ALU_OUT_S4 = PR_ALU_OUT_S3;
+        PR_DATA_CACHE_OUT = DATA_CACHE_READ_DATA;
         
         PR_REG_WRITE_SELECT_S4  = PR_REG_WRITE_SELECT_S3;
         PR_REG_WRITE_EN_S4 = PR_REG_WRITE_EN_S3;
-
-        PR_ALU_OUT_S4 = PR_ALU_OUT_S3;
-        PR_DATA_CACHE_OUT = DATA_CACHE_READ_DATA;
         
         //************************** STAGE 3 **************************
         #0.001

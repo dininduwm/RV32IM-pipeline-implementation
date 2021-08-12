@@ -28,7 +28,7 @@ module ins_cache_memory(
     //Declare cache memory array 256x8-bits 
     reg [127:0] data_array [8:0];
     //Declare tag array 256x8-bits 
-    reg [2:0] tag_array [8:0];
+    reg [24:0] tag_array [8:0];
     //Declare valid bit array 256x8-bits 
     reg [1:0] validBit_array [8:0];
 
