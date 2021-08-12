@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
-[*] Thu Aug 12 09:20:22 2021
+[*] Thu Aug 12 12:39:12 2021
 [*]
 [dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/cpu_wavedata.vcd"
-[dumpfile_mtime] "Thu Aug 12 09:20:21 2021"
-[dumpfile_size] 37447
+[dumpfile_mtime] "Thu Aug 12 12:07:01 2021"
+[dumpfile_size] 32770
 [savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/Untitled.gtkw"
-[timestart] 2135800
+[timestart] 2161600
 [size] 1920 1027
 [pos] -1 -1
-*-15.557479 766200 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.557479 2309600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbenchCPU.
 [treeopen] testbenchCPU.mycpu.
 [sst_width] 307
@@ -46,6 +46,14 @@ testbenchCPU.mycpu.oparand2_mux.RESULT[31:0]
 @28
 testbenchCPU.mycpu.oparand2_mux.SELECT
 @200
+-Oparand 1 Select MUX
+@22
+testbenchCPU.mycpu.oparand1_mux.INPUT1[31:0]
+testbenchCPU.mycpu.oparand1_mux.INPUT2[31:0]
+testbenchCPU.mycpu.oparand1_mux.RESULT[31:0]
+@28
+testbenchCPU.mycpu.oparand1_mux.SELECT
+@200
 -
 -Immediate Select Unit
 @22
@@ -58,7 +66,7 @@ testbenchCPU.mycpu.myImmediate.SELECT[3:0]
 -ALU
 @28
 testbenchCPU.mycpu.myAlu.SELECT[4:0]
-@22
+@24
 testbenchCPU.mycpu.myAlu.DATA1[31:0]
 testbenchCPU.mycpu.myAlu.DATA2[31:0]
 testbenchCPU.mycpu.myAlu.RESULT[31:0]
@@ -91,9 +99,7 @@ testbenchCPU.mycpu.PR_REG_WRITE_EN_S2
 testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S2[1:0]
 @22
 testbenchCPU.mycpu.PR_DATA_1_S2[31:0]
-@23
 testbenchCPU.mycpu.PR_DATA_2_S2[31:0]
-@22
 testbenchCPU.mycpu.PR_IMMEDIATE_SELECT_OUT[31:0]
 testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S2[4:0]
 testbenchCPU.mycpu.IMMEDIATE_OUT_S2[31:0]
@@ -175,7 +181,9 @@ testbenchCPU.myCacheMemory.block[127:0]
 testbenchCPU.myCacheMemory.byte_offset[1:0]
 @22
 testbenchCPU.myCacheMemory.cache_readdata[31:0]
+@23
 testbenchCPU.myCacheMemory.cache_writedata[31:0]
+@22
 testbenchCPU.myCacheMemory.write_mask[31:0]
 @200
 -
@@ -199,8 +207,20 @@ testbenchCPU.myDataMem.write
 @22
 testbenchCPU.mycpu.myBranchSelect.DATA1[31:0]
 testbenchCPU.mycpu.myBranchSelect.DATA2[31:0]
-testbenchCPU.mycpu.myBranchSelect.SELECT[3:0]
 @28
+testbenchCPU.mycpu.myBranchSelect.SELECT[3:0]
 testbenchCPU.mycpu.myBranchSelect.MUX_OUT
+@200
+-Branch MUX
+@24
+testbenchCPU.mycpu.myAlu.RESULT[31:0]
+testbenchCPU.mycpu.muxjump.INPUT1[31:0]
+@22
+testbenchCPU.mycpu.muxjump.INPUT2[31:0]
+testbenchCPU.mycpu.muxjump.RESULT[31:0]
+@28
+testbenchCPU.mycpu.muxjump.SELECT
+@24
+testbenchCPU.PC[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
