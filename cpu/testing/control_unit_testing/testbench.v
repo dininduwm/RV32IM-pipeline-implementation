@@ -1,4 +1,5 @@
 `include "../../verilog/control_unit.v"
+`include "../../verilog/mux2to1_3bit.v"
 
 module control_unit_tb;
 

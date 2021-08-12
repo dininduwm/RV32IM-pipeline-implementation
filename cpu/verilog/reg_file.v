@@ -19,9 +19,9 @@ begin
     // write input to the in address
     
     // TODO : set the time delay
-    #0.001
+    // #0.001
     
-    if (WRITE == 1'b1)
+        if (WRITE == 1'b1)
     begin
         REGISTERS[INADDRESS] = IN; 
     end    

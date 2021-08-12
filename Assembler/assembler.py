@@ -54,6 +54,7 @@ def formatInstruction(ins):
                 # removing ) from the string
                 item = item.replace(')', '')
                 tmp_split_3 = item.split('(')
+                tmp_split_3.reverse()
                 segmented_list.extend(tmp_split_3)
             else:
                 segmented_list.append(item)
@@ -93,9 +94,9 @@ def handleInstruction(separatedIns):
         
         
     elif(inst_data[separatedIns[0]]['type'] == "S-Type"):
-        # sw rs2:value, immediate, rs1:base
-        immediate = toBin(12, separatedIns[2])
-        Instruction = immediate[:7] + space + toBin(5, separatedIns[1]) + space + toBin(5, separatedIns[3])+ space + inst_data[separatedIns[0]]['funct3']+ space + immediate[7:] + space + inst_data[separatedIns[0]]['opcode']
+        # sw rs2:value, rs1:base,  immediate
+        immediate = toBin(12, separatedIns[3])
+        Instruction = immediate[:7] + space + toBin(5, separatedIns[1]) + space + toBin(5, separatedIns[2])+ space + inst_data[separatedIns[0]]['funct3']+ space + immediate[7:] + space + inst_data[separatedIns[0]]['opcode']
     
     elif(inst_data[separatedIns[0]]['type'] == "B-Type"):
         # beq rs1, rs2, label
@@ -111,9 +112,10 @@ def handleInstruction(separatedIns):
         #jal rd, immediate
         immediate = toBin(21, separatedIns[2])
         Instruction = immediate[0] + space + immediate[10:20]+ space +immediate[9] + space + immediate[1:9] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
-        
+    elif(inst_data[separatedIns[0]]['type'] == "NOP-type"):
+        Instruction = "0"*32
 
-    print(separatedIns[0], Instruction)
+    print(separatedIns[0],separatedIns, Instruction, hex(int(Instruction, 2)))
     saveToFile(Instruction)
 
 # taking the file name if passed as an argument
@@ -155,9 +157,9 @@ def toBin(numOfDigits, num):
 # saving data to a .bin file
 def saveToFile(line):
     global inst_count
-    file = argList['inp_file'].split('.')[0] + '.bin'
+    file = "../cpu/verilog/"+ argList['inp_file'].split('.')[0] + '.bin'
     if not (argList['out_file'] == ''):
-        file = argList['out_file']
+        file = "../cpu/verilog/" + argList['out_file']
     # saving the new line to the output file
     f = open(file, "a")
     for i in range(3, -1, -1):
@@ -168,9 +170,9 @@ def saveToFile(line):
 # fillig the rest of the file 
 def fillTheFile():
     global FILE_SIZE
-    file = argList['inp_file'].split('.')[0] + '.bin'
+    file = "../cpu/verilog/" + argList['inp_file'].split('.')[0] + '.bin'
     if not (argList['out_file'] == ''):
-        file = argList['out_file']
+        file = "../cpu/verilog/" + argList['out_file']
 
     f = open(file, "a")
     for i in range(FILE_SIZE - (4*inst_count)):
@@ -182,9 +184,9 @@ def fillTheFile():
 
 if __name__ == "__main__":
     # remove all .bin file in the directory
-    for i in os.listdir('.'):
+    for i in os.listdir("../cpu/verilog"):
         if i.endswith(".bin"):
-            os.remove(i)
+            os.remove("../cpu/verilog/" + i)
 
     #create the instruction disctionary
     read_csv()

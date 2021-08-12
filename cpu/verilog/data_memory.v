@@ -47,26 +47,27 @@ end
 always @(posedge clock)
 begin
 	if(readaccess)
-	begin		
-		readdata[7:0]   = #40 memory_array[{address,4'b0000}];
-		readdata[15:8]  = #40 memory_array[{address,4'b0001}];
-		readdata[23:16] = #40 memory_array[{address,4'b0010}];
-		readdata[31:24] = #40 memory_array[{address,4'b0011}];
+	begin
+		//TODO set the delay to a ralistic value, #4 used for tesing		
+		readdata[7:0]   = #4 memory_array[{address,4'b0000}];
+		readdata[15:8]  = #4 memory_array[{address,4'b0001}];
+		readdata[23:16] = #4 memory_array[{address,4'b0010}];
+		readdata[31:24] = #4 memory_array[{address,4'b0011}];
 
-        readdata[39:32] = #40 memory_array[{address,4'b0100}];
-		readdata[47:40] = #40 memory_array[{address,4'b0101}];
-		readdata[55:48] = #40 memory_array[{address,4'b0110}];
-		readdata[63:56] = #40 memory_array[{address,4'b0111}];
+        readdata[39:32] = #4 memory_array[{address,4'b0100}];
+		readdata[47:40] = #4 memory_array[{address,4'b0101}];
+		readdata[55:48] = #4 memory_array[{address,4'b0110}];
+		readdata[63:56] = #4 memory_array[{address,4'b0111}];
 
-        readdata[71:64] = #40 memory_array[{address,4'b1000}];
-		readdata[79:72] = #40 memory_array[{address,4'b1001}];
-		readdata[87:80] = #40 memory_array[{address,4'b1010}];
-		readdata[95:88] = #40 memory_array[{address,4'b1011}];
+        readdata[71:64] = #4 memory_array[{address,4'b1000}];
+		readdata[79:72] = #4 memory_array[{address,4'b1001}];
+		readdata[87:80] = #4 memory_array[{address,4'b1010}];
+		readdata[95:88] = #4 memory_array[{address,4'b1011}];
 
-        readdata[103:96]  = #40 memory_array[{address,4'b1100}];
-		readdata[111:104] = #40 memory_array[{address,4'b1101}];
-		readdata[119:112] = #40 memory_array[{address,4'b1110}];
-		readdata[127:120] = #40 memory_array[{address,4'b1111}];
+        readdata[103:96]  = #4 memory_array[{address,4'b1100}];
+		readdata[111:104] = #4 memory_array[{address,4'b1101}];
+		readdata[119:112] = #4 memory_array[{address,4'b1110}];
+		readdata[127:120] = #4 memory_array[{address,4'b1111}];
 		busywait = 0;
 		readaccess = 0;
 	end

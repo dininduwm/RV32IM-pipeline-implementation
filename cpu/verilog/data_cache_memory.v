@@ -144,6 +144,8 @@ module data_cache_memory(
     // TODO: Check for the timing
     assign #0.9 TAG_MATCH = ~(tag[2]^CURRENT_TAG[2]) && ~(tag[1]^CURRENT_TAG[1]) && ~(tag[0]^CURRENT_TAG[0]);
 
+    wire [127:0]block;
+    assign block = data_array[3'b001];
     // putting data if read access
     always @(*)
     begin
@@ -168,10 +170,11 @@ module data_cache_memory(
     //Detecting an incoming memory access
     reg readaccess, writeaccess;
     always @(read, write)
+    // always @(*)
     begin
         //TODO changed to handle undefined state
-        if (!(read[3] == 1'bx || write[2] == 1'bx))
-            busywait = (read[3] || write[2])? 1 : 0;
+        if (!(read === 4'bx || write === 3'bx))
+            busywait = (read[3] || write[2]);
         else
             busywait = 1'b0;
         readaccess = (read[3] && !write[2])? 1 : 0;
@@ -312,6 +315,7 @@ module data_cache_memory(
             tag_array[index] = tag;
             validBit_array[index] = 1'b1; // set the valid bit after loading data
             dirtyBit_array[index] = 1'b0; // set the dirty bit after loading data
+            writeCache_mem = 1'b0;
         end
     end
 
@@ -368,11 +372,6 @@ module data_cache_memory(
     // to deassert and write back to the posedge
     always @ (posedge clock)
     begin
-        if (readCache || writeCache)
-        begin       
-            busywait = 1'b0; // set the busy wait signal to zero     
-            readCache = 1'b0; // pull the read signal to low
-        end
         
         if (writeCache) 
         begin
@@ -380,31 +379,38 @@ module data_cache_memory(
                 2'b00:
                     begin
                         data_array[index][31:0] = (data_array[index][31:0] & write_mask);
-                        #1
+                        // #1
                         data_array[index][31:0] = (data_array[index][31:0] | cache_writedata);
                     end
                 2'b01:
                     begin
                         data_array[index][63:32] = (data_array[index][63:32] & write_mask);
-                        #1
+                        // #1
                         data_array[index][63:32] = (data_array[index][63:32] | cache_writedata);
                     end
                 2'b10:
                     begin
                         data_array[index][95:64] = (data_array[index][95:64] & write_mask);
-                        #1
+                        // #1
                         data_array[index][95:64] = (data_array[index][95:64] | cache_writedata);
                     end
                 2'b11:
                     begin
                         data_array[index][127:96] = ( data_array[index][127:96] & write_mask);
-                        #1
+                        // #1
                         data_array[index][127:96] = (data_array[index][127:96] | cache_writedata);
                     end
             endcase
 
             dirtyBit_array[index] = 1'b1; // set the dirty bit because data is not consistant with the memory
             writeCache = 1'b0; // pull the write signal to low
+            busywait = 1'b0; // set the busy wait signal to zero  
+        end
+
+        if (readCache)
+        begin       
+            busywait = 1'b0; // set the busy wait signal to zero     
+            readCache = 1'b0; // pull the read signal to low
         end
     end
 

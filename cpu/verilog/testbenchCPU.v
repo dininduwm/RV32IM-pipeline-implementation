@@ -42,7 +42,7 @@ module testbenchCPU;
                 insReadEn, INS_CACHE_BUSY_WAIT); //initialize the cpu
                 
     data_cache_memory myCacheMemory(CLK, RESET, memRead, memWrite, ADDRESS, WRITE_DATA, READ_DATA, BUSY_WAIT,
-              MAIN_M_READ, 
+              MAIN_MEM_READ, 
               MAIN_MEM_WRITE, 
               MAIN_MEM_ADDRESS,
               MAIN_MEM_WRITE_DATA, 
@@ -161,7 +161,7 @@ module testbenchCPU;
         #25
         RESET = 1'b0;
 
-        #3000
+        #5000
         $finish;
     end
     

@@ -20,6 +20,7 @@ module branch_select(DATA1, DATA2, SELECT, MUX_OUT);
     always @(*) 
     begin
         if (SELECT[3])
+        #2
         begin
             case (SELECT[2:0])
                 // for JAL and JALR
@@ -46,6 +47,11 @@ module branch_select(DATA1, DATA2, SELECT, MUX_OUT);
                 default:
                     MUX_OUT = 1'b0;
             endcase
+        end
+        
+        else 
+        begin
+        #2 MUX_OUT = 1'b0;
         end
     end
 

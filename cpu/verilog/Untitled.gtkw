@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
-[*] Tue Aug 10 17:45:12 2021
+[*] Thu Aug 12 09:20:22 2021
 [*]
 [dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/cpu_wavedata.vcd"
-[dumpfile_mtime] "Tue Aug 10 17:43:44 2021"
-[dumpfile_size] 31431
+[dumpfile_mtime] "Thu Aug 12 09:20:21 2021"
+[dumpfile_size] 37447
 [savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/Untitled.gtkw"
-[timestart] 1442900
+[timestart] 2135800
 [size] 1920 1027
 [pos] -1 -1
-*-15.557479 1539800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.557479 766200 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbenchCPU.
 [treeopen] testbenchCPU.mycpu.
 [sst_width] 307
 [signals_width] 366
 [sst_expanded] 1
-[sst_vpaned_height] 317
+[sst_vpaned_height] 436
 @28
 testbenchCPU.mycpu.INS_CACHE_BUSY_WAIT
 testbenchCPU.mycpu.DATA_CACHE_BUSY_WAIT
@@ -24,8 +24,9 @@ testbenchCPU.mycpu.RESET
 testbenchCPU.INS[31:0]
 @28
 testbenchCPU.mycpu.CLK
-@22
+@24
 testbenchCPU.mycpu.PC[31:0]
+@22
 testbenchCPU.mycpu.INSTRUCTION[31:0]
 testbenchCPU.mycpu.ALU_IN_1[31:0]
 testbenchCPU.mycpu.ALU_IN_2[31:0]
@@ -50,10 +51,13 @@ testbenchCPU.mycpu.oparand2_mux.SELECT
 @22
 testbenchCPU.mycpu.myImmediate.INST[31:0]
 testbenchCPU.mycpu.myImmediate.OUT[31:0]
+@28
 testbenchCPU.mycpu.myImmediate.SELECT[3:0]
 @200
 -
 -ALU
+@28
+testbenchCPU.mycpu.myAlu.SELECT[4:0]
 @22
 testbenchCPU.mycpu.myAlu.DATA1[31:0]
 testbenchCPU.mycpu.myAlu.DATA2[31:0]
@@ -67,6 +71,7 @@ testbenchCPU.mycpu.myreg.OUT1[31:0]
 testbenchCPU.mycpu.myreg.OUT2ADDRESS[4:0]
 testbenchCPU.mycpu.myreg.OUT2[31:0]
 testbenchCPU.mycpu.myreg.INADDRESS[4:0]
+@24
 testbenchCPU.mycpu.myreg.IN[31:0]
 @28
 testbenchCPU.mycpu.myreg.WRITE
@@ -78,6 +83,7 @@ testbenchCPU.mycpu.CLK
 -Stage 1 Pipeline Reg
 @22
 testbenchCPU.mycpu.PR_INSTRUCTION[31:0]
+testbenchCPU.mycpu.PR_PC_S1[31:0]
 @200
 -Stage 2 Pipeline Reg
 @28
@@ -85,10 +91,17 @@ testbenchCPU.mycpu.PR_REG_WRITE_EN_S2
 testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S2[1:0]
 @22
 testbenchCPU.mycpu.PR_DATA_1_S2[31:0]
+@23
 testbenchCPU.mycpu.PR_DATA_2_S2[31:0]
+@22
 testbenchCPU.mycpu.PR_IMMEDIATE_SELECT_OUT[31:0]
 testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S2[4:0]
 testbenchCPU.mycpu.IMMEDIATE_OUT_S2[31:0]
+@28
+testbenchCPU.mycpu.PR_MEM_READ_S2[3:0]
+testbenchCPU.mycpu.PR_MEM_WRITE_S2[2:0]
+@22
+testbenchCPU.mycpu.PR_PC_S2[31:0]
 @200
 -
 -Stage 3 Pipeline Reg
@@ -98,6 +111,11 @@ testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S3[1:0]
 @22
 testbenchCPU.mycpu.PR_ALU_OUT_S3[31:0]
 testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S3[4:0]
+@28
+testbenchCPU.mycpu.PR_MEM_READ_S3[3:0]
+testbenchCPU.mycpu.PR_MEM_WRITE_S3[2:0]
+@22
+testbenchCPU.mycpu.PR_PC_S3[31:0]
 @200
 -
 -Stage 4 Pipeline Reg
@@ -107,6 +125,8 @@ testbenchCPU.mycpu.PR_REG_WRITE_SELECT_S4[1:0]
 @22
 testbenchCPU.mycpu.PR_ALU_OUT_S4[31:0]
 testbenchCPU.mycpu.PR_REGISTER_WRITE_ADDR_S4[4:0]
+testbenchCPU.mycpu.PR_DATA_CACHE_OUT[31:0]
+testbenchCPU.mycpu.PR_PC_S4[31:0]
 @200
 -
 -REG Write Select MUX
@@ -118,5 +138,69 @@ testbenchCPU.mycpu.regWriteSelMUX.INPUT4[31:0]
 testbenchCPU.mycpu.regWriteSelMUX.RESULT[31:0]
 @28
 testbenchCPU.mycpu.regWriteSelMUX.SELECT[1:0]
+@200
+-
+-Data Cache
+@24
+testbenchCPU.myCacheMemory.address[31:0]
+@28
+testbenchCPU.myCacheMemory.busywait
+testbenchCPU.myCacheMemory.readaccess
+testbenchCPU.myCacheMemory.writeaccess
+testbenchCPU.myCacheMemory.read[3:0]
+@22
+testbenchCPU.myCacheMemory.readdata[31:0]
+@28
+testbenchCPU.myCacheMemory.write[2:0]
+@22
+testbenchCPU.myCacheMemory.writedata[31:0]
+testbenchCPU.myDataMem.readdata[127:0]
+@28
+testbenchCPU.myCacheMemory.MAIN_MEM_READ
+testbenchCPU.myCacheMemory.index[2:0]
+testbenchCPU.myCacheMemory.TAG_MATCH
+@22
+testbenchCPU.myCacheMemory.CURRENT_TAG[24:0]
+@28
+testbenchCPU.myCacheMemory.CURRENT_DIRTY
+@22
+testbenchCPU.myCacheMemory.CURRENT_DATA[127:0]
+@28
+testbenchCPU.myCacheMemory.writeCache
+testbenchCPU.myCacheMemory.writeCache_mem
+testbenchCPU.myCacheMemory.MAIN_MEM_BUSY_WAIT
+@22
+testbenchCPU.myCacheMemory.block[127:0]
+@28
+testbenchCPU.myCacheMemory.byte_offset[1:0]
+@22
+testbenchCPU.myCacheMemory.cache_readdata[31:0]
+testbenchCPU.myCacheMemory.cache_writedata[31:0]
+testbenchCPU.myCacheMemory.write_mask[31:0]
+@200
+-
+-Data Memory
+@22
+testbenchCPU.myDataMem.address[27:0]
+@28
+testbenchCPU.myDataMem.busywait
+testbenchCPU.myDataMem.clock
+testbenchCPU.myDataMem.readaccess
+testbenchCPU.myDataMem.writeaccess
+@22
+testbenchCPU.myDataMem.readdata[127:0]
+testbenchCPU.myDataMem.writedata[127:0]
+@28
+testbenchCPU.myDataMem.read
+testbenchCPU.myDataMem.write
+@200
+-
+-Branch Unit
+@22
+testbenchCPU.mycpu.myBranchSelect.DATA1[31:0]
+testbenchCPU.mycpu.myBranchSelect.DATA2[31:0]
+testbenchCPU.mycpu.myBranchSelect.SELECT[3:0]
+@28
+testbenchCPU.mycpu.myBranchSelect.MUX_OUT
 [pattern_trace] 1
 [pattern_trace] 0

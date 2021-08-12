@@ -132,9 +132,6 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
         // units
         
 
-        // connections
-        assign PC_PLUS_4_2 = PR_PC_S3 + 4;
-
         assign DATA_CACHE_DATA = PR_DATA_2_S3;
         assign DATA_CACHE_ADDR = PR_ALU_OUT_S3;
         assign memWriteEn = PR_MEM_WRITE_S3;
@@ -146,7 +143,8 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
         wire [31:0] REG_WRITE_DATA;
 
         // units
-        mux4to1_32bit regWriteSelMUX (PR_PC_S4, PR_ALU_OUT_S4, PR_DATA_CACHE_OUT, 32'b0, REG_WRITE_DATA, PR_REG_WRITE_SELECT_S4);
+        // mux4to1_32bit regWriteSelMUX (PR_PC_S4, PR_ALU_OUT_S4, PR_DATA_CACHE_OUT, 32'b0, REG_WRITE_DATA, PR_REG_WRITE_SELECT_S4);
+        mux4to1_32bit regWriteSelMUX (PR_DATA_CACHE_OUT, PR_ALU_OUT_S4, 32'b0, PR_PC_S4, REG_WRITE_DATA, PR_REG_WRITE_SELECT_S4);
 
         // connections
 
@@ -157,7 +155,7 @@ always @(posedge CLK) begin
     begin
         //************************** STAGE 4 **************************
         PR_REGISTER_WRITE_ADDR_S4 = PR_REGISTER_WRITE_ADDR_S3;
-        PR_PC_S4 = PC_PLUS_4_2;
+        PR_PC_S4 = PR_PC_S3;
         
         PR_REG_WRITE_SELECT_S4  = PR_REG_WRITE_SELECT_S3;
         PR_REG_WRITE_EN_S4 = PR_REG_WRITE_EN_S3;
@@ -170,7 +168,7 @@ always @(posedge CLK) begin
         PR_REGISTER_WRITE_ADDR_S3 = PR_REGISTER_WRITE_ADDR_S2;
         PR_PC_S3 = PR_PC_S2;
         PR_ALU_OUT_S3 = ALU_OUT;
-        PR_DATA_2_S3 = PR_DATA_1_S2;    
+        PR_DATA_2_S3 = PR_DATA_2_S2;    
         
         PR_MEM_READ_S3 = PR_MEM_READ_S2;
         PR_MEM_WRITE_S3 = PR_MEM_WRITE_S2;
@@ -197,7 +195,7 @@ always @(posedge CLK) begin
         //************************** STAGE 1 **************************
         #0.001
         PR_INSTRUCTION = INSTRUCTION;
-        PR_PC_S1 = PC;
+        PR_PC_S1 = PC_PLUS_4;
     end
 
 end

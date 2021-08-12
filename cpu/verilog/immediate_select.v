@@ -29,7 +29,7 @@ always @(*) begin
             if (SELECT[3] == 1'b1) 
                 OUT = {{11{1'b0}}, TYPE2, 1'b0};
             else
-                OUT = {{11{TYPE2[19]}}, TYPE2, 1'b0};
+                OUT = {{11{1'b0}}, INST[31], INST[19:12], INST[20], INST[30:21], 1'b0}; //{{11{TYPE2[19]}}, TYPE2, 1'b0};
         // TYPE 3 
         3'b010:
             if (SELECT[3] == 1'b1) 
