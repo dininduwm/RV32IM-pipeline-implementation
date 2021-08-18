@@ -1,15 +1,16 @@
 `timescale 1ns/100ps
 
 // including the modules
-`include "control_unit.v"
-`include "alu.v"
-`include "reg_file.v"
+`include "../supported_modules/mux2to1_3bit.v"
+`include "../control_unit_module/control_unit.v"
+`include "../alu_module/alu.v"
+`include "../register_file_module/reg_file.v"
 // `include "data_cache_memory.v"
 // `include "ins_cache_memory.v"
-`include "immediate_select.v"
-`include "branch_select.v"
-`include "mux2to1_32bit.v"
-`include "mux4to1_32bit.v"
+`include "../immediate_select_module/immediate_select.v"
+`include "../branch_select_module/branch_select.v"
+`include "../supported_modules/mux2to1_32bit.v"
+`include "../supported_modules/mux4to1_32bit.v"
 
 module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, DATA_CACHE_DATA, DATA_CACHE_READ_DATA, DATA_CACHE_BUSY_WAIT,
             insReadEn, INS_CACHE_BUSY_WAIT);

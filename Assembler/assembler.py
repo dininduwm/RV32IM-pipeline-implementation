@@ -152,14 +152,16 @@ def handleInpFile():
 
 # convert a given number to binary according to a given format
 def toBin(numOfDigits, num):
-    return format(numOfDigits, "{0:b}".format(int(num)))
+    num = int(num)
+    s = bin(num & int("1"*numOfDigits, 2))[2:]
+    return ("{0:0>%s}" % (numOfDigits)).format(s)
 
 # saving data to a .bin file
 def saveToFile(line):
     global inst_count
-    file = "../cpu/verilog/"+ argList['inp_file'].split('.')[0] + '.bin'
+    file = "../cpu/build/"+ argList['inp_file'].split('.')[0] + '.bin'
     if not (argList['out_file'] == ''):
-        file = "../cpu/verilog/" + argList['out_file']
+        file = "../cpu/build/" + argList['out_file']
     # saving the new line to the output file
     f = open(file, "a")
     for i in range(3, -1, -1):
@@ -170,9 +172,9 @@ def saveToFile(line):
 # fillig the rest of the file 
 def fillTheFile():
     global FILE_SIZE
-    file = "../cpu/verilog/" + argList['inp_file'].split('.')[0] + '.bin'
+    file = "../cpu/build/" + argList['inp_file'].split('.')[0] + '.bin'
     if not (argList['out_file'] == ''):
-        file = "../cpu/verilog/" + argList['out_file']
+        file = "../cpu/build/" + argList['out_file']
 
     f = open(file, "a")
     for i in range(FILE_SIZE - (4*inst_count)):
@@ -184,9 +186,9 @@ def fillTheFile():
 
 if __name__ == "__main__":
     # remove all .bin file in the directory
-    for i in os.listdir("../cpu/verilog"):
+    for i in os.listdir("../cpu/build"):
         if i.endswith(".bin"):
-            os.remove("../cpu/verilog/" + i)
+            os.remove("../cpu/build/" + i)
 
     #create the instruction disctionary
     read_csv()

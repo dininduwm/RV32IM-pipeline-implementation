@@ -1,11 +1,11 @@
 [*]
 [*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
-[*] Thu Aug 12 12:39:12 2021
+[*] Wed Aug 18 15:24:07 2021
 [*]
-[dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/cpu_wavedata.vcd"
-[dumpfile_mtime] "Thu Aug 12 12:07:01 2021"
-[dumpfile_size] 32770
-[savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/cpu/verilog/Untitled.gtkw"
+[dumpfile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/CPU/build/cpu_wavedata.vcd"
+[dumpfile_mtime] "Wed Aug 18 15:14:24 2021"
+[dumpfile_size] 29608
+[savefile] "/Users/dtdinidu7/Desktop/Projects/riskv-pipeline-cpu/CPU/formated_gtkwave_files/Main.gtkw"
 [timestart] 2161600
 [size] 1920 1027
 [pos] -1 -1
@@ -15,7 +15,7 @@
 [sst_width] 307
 [signals_width] 366
 [sst_expanded] 1
-[sst_vpaned_height] 436
+[sst_vpaned_height] 788
 @28
 testbenchCPU.mycpu.INS_CACHE_BUSY_WAIT
 testbenchCPU.mycpu.DATA_CACHE_BUSY_WAIT

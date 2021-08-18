@@ -3,11 +3,11 @@ Author - W M D U Thilakarathna
 Reg No - E/16/366
 */
 
-`include "cpu.v"
-`include "data_memory.v"
-`include "data_cache_memory.v"
-`include "ins_memory.v"
-`include "ins_cache_memory.v"
+`include "../cpu_module/cpu.v"
+`include "../data_memory_module/data_memory.v"
+`include "../data_memory_module/data_cache_memory.v"
+`include "../instruction_memory_module/ins_memory.v"
+`include "../instruction_memory_module/ins_cache_memory.v"
 `timescale 1ns/100ps
 
 module testbenchCPU;
@@ -75,7 +75,7 @@ module testbenchCPU;
                           mycpu.myreg.REGISTERS[3], mycpu.myreg.REGISTERS[4], mycpu.myreg.REGISTERS[5], 
                           mycpu.myreg.REGISTERS[6], mycpu.myreg.REGISTERS[7]);
       // generate files needed to plot the waveform using GTKWave
-      $dumpfile("cpu_wavedata.vcd");
+      $dumpfile("../../build/cpu_wavedata.vcd");
       $dumpvars(0, testbenchCPU);
     end
 

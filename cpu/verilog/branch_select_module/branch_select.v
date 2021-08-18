@@ -11,9 +11,9 @@ module branch_select(DATA1, DATA2, SELECT, MUX_OUT);
     assign BEQ = DATA1 == DATA2;
     assign BNE = DATA1 != DATA2;
     assign BLT = DATA1 < DATA2;
-    assign BGE = DATA1 > DATA2;
+    assign BGE = DATA1 >= DATA2;
     assign BLTU = $unsigned(DATA1) < $unsigned(DATA2);
-    assign BGEU = $unsigned(DATA1) > $unsigned(DATA2);
+    assign BGEU = $unsigned(DATA1) >= $unsigned(DATA2);
     
     
     // TODO: implement the function

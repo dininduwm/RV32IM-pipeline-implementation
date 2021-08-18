@@ -4,7 +4,7 @@ Reg No - E/16/366
 */
 
 // comment this to run the control unit test programme
-`include "mux2to1_3bit.v"
+// `include "../supported_modules/mux2to1_3bit.v"
 
 `timescale 1ns/100ps
 
@@ -72,7 +72,7 @@ module control_unit(INSTRUCTION, alu_signal, reg_file_write, main_mem_write, mai
                                     (opcode == 7'b0010011) ? 3'b010 : 3'bxxx;
 
     // operand 1 and 2 signal genaration
-    assign #3 oparand_1_select = (opcode == 7'b0010111) | (opcode == 7'b1101111) | (opcode == 7'b1100111); // if AUIPC, JAL, JALR
+    assign #3 oparand_1_select = (opcode == 7'b0010111) | (opcode == 7'b1101111) | (opcode == 7'b1100111) | (opcode == 7'b1100011); // if AUIPC, JAL, JALR
     //TODO: test the dont care condition.
     assign #3 oparand_2_select = (opcode == 7'b0000011) | // all L_inst
                               (opcode == 7'b0010011) | //immediate_inst
