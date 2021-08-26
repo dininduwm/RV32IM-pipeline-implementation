@@ -133,7 +133,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
                                                PR_REGISTER_WRITE_ADDR_S3, 
                                                PR_REG_WRITE_EN_S3, 
                                                PR_REGISTER_WRITE_ADDR_S4, 
-                                               PR_REG_WRITE_EN_S3,  
+                                               PR_REG_WRITE_EN_S4,  
                                                PR_REGISTER_WRITE_ADDR_S5, 
                                                PR_REG_WRITE_EN_S5, 
                                                OP1_HAZ_MUX_SEL, 
@@ -189,7 +189,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
 
 // register updating section
 always @(posedge CLK) begin
-    #0.02
+    #1
     if (!(DATA_CACHE_BUSY_WAIT || INS_CACHE_BUSY_WAIT))
     begin
         //************************** STAGE 5 Tempary stage for the fowarding unit **************************
@@ -213,7 +213,7 @@ always @(posedge CLK) begin
         PR_REGISTER_WRITE_ADDR_S3 = PR_REGISTER_WRITE_ADDR_S2;
         PR_PC_S3 = PR_PC_S2;
         PR_ALU_OUT_S3 = ALU_OUT;
-        PR_DATA_2_S3 = PR_DATA_2_S2;    
+        PR_DATA_2_S3 = OP2_HAZ_MUX_OUT;    
         
         PR_MEM_READ_S3 = PR_MEM_READ_S2;
         PR_MEM_WRITE_S3 = PR_MEM_WRITE_S2;

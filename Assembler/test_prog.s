@@ -1,27 +1,13 @@
-addi x0, x1, -7
-addi x1, x1, 8
-nop
-nop
-nop
-nop
-nop
+addi x2, x2, 8
+sw x2, 12(x0)
 nop 
-bltu x0, x1, 20
-nop
-nop
-nop
-nop
-nop
 nop 
-nop
-nop
 nop 
-nop
-nop
-nop
-nop
-nop
 nop 
-nop
-nop
-nop
+lw x1, 12(x0)
+sw x1, 8(x0)
+nop 
+nop 
+nop 
+nop 
+lw x4, 8(x0)
