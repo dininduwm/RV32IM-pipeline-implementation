@@ -49,7 +49,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
     reg [31:0] PR_PC_S2, PR_DATA_1_S2, PR_DATA_2_S2, PR_IMMEDIATE_SELECT_OUT;
     reg [4:0] PR_REGISTER_WRITE_ADDR_S2;
     // for the fowarding unit
-    reg [4:0] REG_READ_ADDR1, REG_READ_ADDR2;
+    reg [4:0] REG_READ_ADDR1_S2, REG_READ_ADDR2_S2;
 
     // control lines
     reg [3:0] PR_BRANCH_SELECT_S2, PR_MEM_READ_S2;
@@ -99,6 +99,8 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
 //************************** STAGE 3 **************************
     reg [31:0] PR_PC_S3, PR_ALU_OUT_S3, PR_DATA_2_S3;
     reg [4:0] PR_REGISTER_WRITE_ADDR_S3;
+    // for the fowarding unit Stage 4
+    reg [4:0] REG_READ_ADDR2_S3;
 
     // control lines
     reg [3:0] PR_MEM_READ_S3;
@@ -126,8 +128,8 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
 
         // fowarding unit in stage 3
         stage3_forward_unit myStage3Fowarding (PR_MEM_WRITE_S2[2], 
-                                               REG_READ_ADDR1, 
-                                               REG_READ_ADDR2, 
+                                               REG_READ_ADDR1_S2, 
+                                               REG_READ_ADDR2_S2, 
                                                PR_OPERAND1_SEL, 
                                                PR_OPERAND2_SEL, 
                                                PR_REGISTER_WRITE_ADDR_S3, 
@@ -147,6 +149,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
     // control lines
     reg [1:0] PR_REG_WRITE_SELECT_S4;
     reg PR_REG_WRITE_EN_S4; 
+    reg [3:0] PR_MEM_READ_S4;
 
     // structure
         // additional wires
@@ -160,10 +163,10 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
         assign memWriteEn = PR_MEM_WRITE_S3;
         assign memReadEn = PR_MEM_READ_S3;
 
-        stage4_forward_unit stage4_forward_unit(PR_REGISTER_WRITE_ADDR_S3, 
+        stage4_forward_unit stage4_forward_unit(REG_READ_ADDR2_S3, 
                                                 PR_REGISTER_WRITE_ADDR_S4, 
                                                 PR_MEM_WRITE_S3[2], 
-                                                PR_MEM_READ_S3[3], 
+                                                PR_MEM_READ_S4[3], 
                                                 HAZ_MUX_SEL);
 
         mux2to1_32bit stage4_forward_unit_mux(PR_DATA_2_S3, PR_DATA_CACHE_OUT, HAZ_MUX_OUT, HAZ_MUX_SEL);
@@ -207,13 +210,15 @@ always @(posedge CLK) begin
         
         PR_REG_WRITE_SELECT_S4  = PR_REG_WRITE_SELECT_S3;
         PR_REG_WRITE_EN_S4 = PR_REG_WRITE_EN_S3;
+        PR_MEM_READ_S4 = PR_MEM_READ_S3;
         
-        //************************** STAGE 3 **************************
+        //************** ************ STAGE 3 **************************
         #0.001
         PR_REGISTER_WRITE_ADDR_S3 = PR_REGISTER_WRITE_ADDR_S2;
         PR_PC_S3 = PR_PC_S2;
         PR_ALU_OUT_S3 = ALU_OUT;
-        PR_DATA_2_S3 = OP2_HAZ_MUX_OUT;    
+        PR_DATA_2_S3 = OP2_HAZ_MUX_OUT; 
+        REG_READ_ADDR2_S3 = REG_READ_ADDR2_S2;   
         
         PR_MEM_READ_S3 = PR_MEM_READ_S2;
         PR_MEM_WRITE_S3 = PR_MEM_WRITE_S2;
@@ -227,8 +232,8 @@ always @(posedge CLK) begin
         PR_DATA_1_S2 = DATA1_S2;
         PR_DATA_2_S2 = DATA2_S2;
         PR_IMMEDIATE_SELECT_OUT = IMMEDIATE_OUT_S2;
-        REG_READ_ADDR1 = PR_INSTRUCTION[19:15];                
-        REG_READ_ADDR2 = PR_INSTRUCTION[24:20];
+        REG_READ_ADDR1_S2 = PR_INSTRUCTION[19:15];                
+        REG_READ_ADDR2_S2 = PR_INSTRUCTION[24:20];
 
         PR_BRANCH_SELECT_S2 =  BRANCH_SELECT;
         PR_ALU_SELECT =  ALU_SELECT;
