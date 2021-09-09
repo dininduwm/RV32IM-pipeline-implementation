@@ -112,6 +112,8 @@ def handleInstruction(separatedIns):
         #jal rd, immediate
         immediate = toBin(21, separatedIns[2])
         Instruction = immediate[0] + space + immediate[10:20]+ space +immediate[9] + space + immediate[1:9] + space + toBin(5, separatedIns[1]) + space + inst_data[separatedIns[0]]['opcode']
+        print(immediate, Instruction)
+
     elif(inst_data[separatedIns[0]]['type'] == "NOP-type"):
         Instruction = "0"*32
 

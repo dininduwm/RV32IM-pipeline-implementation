@@ -124,7 +124,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET, memReadEn, memWriteEn, DATA_CACHE_ADDR, 
         mux2to1_32bit oparand2_mux (OP2_HAZ_MUX_OUT, PR_IMMEDIATE_SELECT_OUT, ALU_IN_2, PR_OPERAND2_SEL);
         
         alu myAlu (ALU_IN_1, ALU_IN_2, ALU_OUT, PR_ALU_SELECT);
-        branch_select myBranchSelect(PR_DATA_1_S2, PR_DATA_2_S2, PR_BRANCH_SELECT_S2, BRANCH_SELECT_OUT);
+        branch_select myBranchSelect(OP1_HAZ_MUX_OUT, OP2_HAZ_MUX_OUT, PR_BRANCH_SELECT_S2, BRANCH_SELECT_OUT);
 
         // fowarding unit in stage 3
         stage3_forward_unit myStage3Fowarding (PR_MEM_WRITE_S2[2], 
@@ -247,7 +247,7 @@ always @(posedge CLK) begin
         //************************** STAGE 1 **************************
         #0.001
         PR_INSTRUCTION = INSTRUCTION;
-        PR_PC_S1 = PC_PLUS_4;
+        PR_PC_S1 = PC; //PC_PLUS_4;
     end
 
 end

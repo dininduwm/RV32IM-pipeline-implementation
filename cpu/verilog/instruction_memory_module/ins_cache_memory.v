@@ -77,13 +77,14 @@ module ins_cache_memory(
 
     // tag matching
     assign #0.9 TAG_MATCH = ~(tag[2]^CURRENT_TAG[2]) && ~(tag[1]^CURRENT_TAG[1]) && ~(tag[0]^CURRENT_TAG[0]);
-
+    reg [127:0] temp;
     // putting data if read access
     always @(*)
     begin
         if (readaccess) // detect the idle read status
         #1
         begin
+            temp = data_array[index];
             // fetching data
             case(offset)
                 2'b00:
@@ -202,6 +203,7 @@ module ins_cache_memory(
             data_array[index] = MAIN_MEM_READ_DATA;
             tag_array[index] = tag;
             validBit_array[index] = 1'b1; // set the valid bit after loading data
+            writeCache_mem = 1'b0;
         end
     end
 

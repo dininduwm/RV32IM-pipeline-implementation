@@ -19,8 +19,8 @@ module branch_select(DATA1, DATA2, SELECT, MUX_OUT);
     // TODO: implement the function
     always @(*) 
     begin
-        if (SELECT[3])
         #2
+        if (SELECT[3])
         begin
             case (SELECT[2:0])
                 // for JAL and JALR
