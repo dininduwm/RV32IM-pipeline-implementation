@@ -142,7 +142,13 @@ def handleInpFile():
     lineCount = 0
     # loop through the file and handle the instrctions separately
     for ins in f:
-        if ins.strip()[-1] == ':':
+        # skipping enpty lines
+        if ins.strip() == '':
+            continue
+        # skiping the comments
+        elif ins.strip()[0] == ';':
+            continue
+        elif ins.strip()[-1] == ':':
             labelPosition[ins.strip()[:(len(ins.strip())-1)]] = lineCount
         else:
             Instructions.append(ins)

@@ -40,9 +40,10 @@ always @(*) begin
         // TYPE 4 
         3'b011:
             if (SELECT[3] == 1'b1) 
-                OUT = {{19{1'b0}}, TYPE4, 1'b0};
-            else
+                // OUT = {{19{1'b0}}, TYPE4, 1'b0};
                 OUT = {{20{1'b0}}, INST[31], INST[7], INST[30:25], INST[11:8], 1'b0};
+            else
+                OUT = {{20{INST[31]}}, INST[31], INST[7], INST[30:25], INST[11:8], 1'b0};
         // TYPE 5 
         3'b100:
             if (SELECT[3] == 1'b1) 

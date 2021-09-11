@@ -32,7 +32,7 @@ module control_unit(INSTRUCTION, alu_signal, reg_file_write, main_mem_write, mai
     assign funct7 = INSTRUCTION[31:25];
 
     // ALU control signal genaration
-    assign #3 funct3_mux_select = (opcode == 7'b0010111) | (opcode == 7'b1101111) | (opcode == 7'b0100011) | (opcode == 7'b0000011);
+    assign #3 funct3_mux_select = (opcode == 7'b0010111) | (opcode == 7'b1101111) | (opcode == 7'b0100011) | (opcode == 7'b0000011) | (opcode == 7'b1100011);
     mux2to1_3bit funct3_mux (funct3, 3'b000, alu_signal[2:0], funct3_mux_select);   
     assign #3 alu_signal[4] = ({opcode, funct3, funct7} == {7'b0010011, 3'b101, 7'b0100000}) | ({opcode, funct3, funct7} == {7'b0110011, 3'b000, 7'b0100000}) | ({opcode, funct3, funct7} == {7'b0110011, 3'b101, 7'b0100000}) | (opcode == 7'b0110111);// if SRAI, SUB, SRA, LUI
     assign #3 alu_signal[3] = ({opcode, funct7} == 14'b01100110000001) | (opcode == 7'b0110111);  // if MUL_inst or LUI

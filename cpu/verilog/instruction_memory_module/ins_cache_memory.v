@@ -37,7 +37,7 @@ module ins_cache_memory(
 
     // variables to handle state changes
     reg CURRENT_VALID;
-    reg [2:0] CURRENT_TAG;
+    reg [24:0] CURRENT_TAG;
     reg [31:0] CURRENT_DATA;
     wire TAG_MATCH;
 
@@ -60,9 +60,10 @@ module ins_cache_memory(
     //        MAIN_MEM_WRITE_DATA, MAIN_MEM_READ_DATA, MAIN_MEM_BUSY_WAIT);
 
     // decoding the address
-    wire [2:0] tag, index;
+    wire [24:0]tag;
+    wire [2:0] index;
     wire [1:0] offset;
-    assign tag = address[9:7];
+    assign tag = address[31:7];
     assign index = address[6:4];
     assign offset = address[3:2];
 
@@ -76,7 +77,7 @@ module ins_cache_memory(
     end
 
     // tag matching
-    assign #0.9 TAG_MATCH = ~(tag[2]^CURRENT_TAG[2]) && ~(tag[1]^CURRENT_TAG[1]) && ~(tag[0]^CURRENT_TAG[0]);
+    assign #0.9 TAG_MATCH = (tag == CURRENT_TAG); //~(tag[2]^CURRENT_TAG[2]) && ~(tag[1]^CURRENT_TAG[1]) && ~(tag[0]^CURRENT_TAG[0]);
     reg [127:0] temp;
     // putting data if read access
     always @(*)
