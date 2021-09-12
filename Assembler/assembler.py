@@ -27,11 +27,13 @@ def format(numOfDigits, num):
 # instruction formatting structure
 # loop through the instructions and do the nessary stuff
 def formatInstructions(Instructions):
+    index = 0
     for ins in Instructions:
-        formatInstruction(ins)
+        formatInstruction(ins, index)
+        index += 1
 
 # format the different types of instructions
-def formatInstruction(ins):
+def formatInstruction(ins, index):
     # final instruction
     finalIns = []
     tmp_split = ins.split()
@@ -47,6 +49,7 @@ def formatInstruction(ins):
         segmented_list = []
 
         for item in tmp_split_2:
+            tmpItem = item
             # removing letter x 
             item = item.replace('x', '')
             # identifyng the sections with brackets
@@ -56,6 +59,9 @@ def formatInstruction(ins):
                 tmp_split_3 = item.split('(')
                 tmp_split_3.reverse()
                 segmented_list.extend(tmp_split_3)
+            elif item.isalpha():
+                # print("Testing", tmpItem, (labelPosition[tmpItem]-index-1)*4)
+                segmented_list.append((labelPosition[tmpItem]-index-1)*4)
             else:
                 segmented_list.append(item)
 
