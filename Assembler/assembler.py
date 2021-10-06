@@ -59,6 +59,7 @@ def formatInstruction(ins, index):
                 tmp_split_3 = item.split('(')
                 tmp_split_3.reverse()
                 segmented_list.extend(tmp_split_3)
+            # resolwing the labels into ofsets
             elif item.isalpha():
                 # print("Testing", tmpItem, (labelPosition[tmpItem]-index-1)*4)
                 segmented_list.append((labelPosition[tmpItem]-index-1)*4)

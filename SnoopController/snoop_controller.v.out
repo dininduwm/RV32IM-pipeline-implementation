@@ -1,0 +1,68 @@
+#! /usr/local/Cellar/icarus-verilog/11.0/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 10;
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/system.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/va_math.vpi";
+S_0x7f9a98f041c0 .scope module, "snoopcontroller" "snoopcontroller" 2 3;
+ .timescale -9 -10;
+    .port_info 0 /OUTPUT 28 "BROADCAST_ADDR_BUS";
+    .port_info 1 /OUTPUT 128 "BROADCAST_DATA_BUS";
+    .port_info 2 /OUTPUT 1 "BROADCAST_INTERRUPT";
+    .port_info 3 /INPUT 28 "CPU_1_INPUT_ADDR_BUS";
+    .port_info 4 /INPUT 128 "CPU_1_INPUT_DATA_BUS";
+    .port_info 5 /INPUT 1 "CPU_1_INPUT_NEW_DATA_INTERUPT";
+    .port_info 6 /OUTPUT 1 "CPU_1_REQUEST_DATA_INTERUPT";
+    .port_info 7 /OUTPUT 1 "CPU_1_INPUT_REQUEST_DATA_INTERUPT";
+    .port_info 8 /INPUT 1 "CPU_1_INPUT_DATA_NOT_AVAILABLE";
+    .port_info 9 /INPUT 1 "CPU_1_INPUT_DATA_AVAILABLE";
+    .port_info 10 /OUTPUT 1 "CPU_1_OUTPUT_DATA_FOUND";
+    .port_info 11 /OUTPUT 1 "CPU_1_OUTPUT_DATA_NOT_FOUND";
+    .port_info 12 /INPUT 28 "CPU_2_INPUT_ADDR_BUS";
+    .port_info 13 /INPUT 128 "CPU_2_INPUT_DATA_BUS";
+    .port_info 14 /INPUT 1 "CPU_2_INPUT_NEW_DATA_INTERUPT";
+    .port_info 15 /OUTPUT 1 "CPU_2_REQUEST_DATA_INTERUPT";
+    .port_info 16 /OUTPUT 1 "CPU_2_INPUT_REQUEST_DATA_INTERUPT";
+    .port_info 17 /INPUT 1 "CPU_2_INPUT_DATA_NOT_AVAILABLE";
+    .port_info 18 /INPUT 1 "CPU_2_INPUT_DATA_AVAILABLE";
+    .port_info 19 /OUTPUT 1 "CPU_2_OUTPUT_DATA_FOUND";
+    .port_info 20 /OUTPUT 1 "CPU_2_OUTPUT_DATA_NOT_FOUND";
+v0x7f9a98f045f0_0 .var "BROADCAST_ADDR_BUS", 27 0;
+v0x7f9a98f14690_0 .var "BROADCAST_DATA_BUS", 127 0;
+v0x7f9a98f14730_0 .var "BROADCAST_INTERRUPT", 0 0;
+o0x7f9a98e32098 .functor BUFZ 28, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f9a98f147e0_0 .net "CPU_1_INPUT_ADDR_BUS", 27 0, o0x7f9a98e32098;  0 drivers
+o0x7f9a98e320c8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f14880_0 .net "CPU_1_INPUT_DATA_AVAILABLE", 0 0, o0x7f9a98e320c8;  0 drivers
+o0x7f9a98e320f8 .functor BUFZ 128, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f9a98f14960_0 .net "CPU_1_INPUT_DATA_BUS", 127 0, o0x7f9a98e320f8;  0 drivers
+o0x7f9a98e32128 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f14a10_0 .net "CPU_1_INPUT_DATA_NOT_AVAILABLE", 0 0, o0x7f9a98e32128;  0 drivers
+o0x7f9a98e32158 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f14ab0_0 .net "CPU_1_INPUT_NEW_DATA_INTERUPT", 0 0, o0x7f9a98e32158;  0 drivers
+v0x7f9a98f14b50_0 .var "CPU_1_INPUT_REQUEST_DATA_INTERUPT", 0 0;
+v0x7f9a98f14c60_0 .var "CPU_1_OUTPUT_DATA_FOUND", 0 0;
+v0x7f9a98f14cf0_0 .var "CPU_1_OUTPUT_DATA_NOT_FOUND", 0 0;
+v0x7f9a98f14d90_0 .var "CPU_1_REQUEST_DATA_INTERUPT", 0 0;
+o0x7f9a98e32248 .functor BUFZ 28, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f9a98f14e30_0 .net "CPU_2_INPUT_ADDR_BUS", 27 0, o0x7f9a98e32248;  0 drivers
+o0x7f9a98e32278 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f14ee0_0 .net "CPU_2_INPUT_DATA_AVAILABLE", 0 0, o0x7f9a98e32278;  0 drivers
+o0x7f9a98e322a8 .functor BUFZ 128, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x7f9a98f14f80_0 .net "CPU_2_INPUT_DATA_BUS", 127 0, o0x7f9a98e322a8;  0 drivers
+o0x7f9a98e322d8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f15030_0 .net "CPU_2_INPUT_DATA_NOT_AVAILABLE", 0 0, o0x7f9a98e322d8;  0 drivers
+o0x7f9a98e32308 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7f9a98f150d0_0 .net "CPU_2_INPUT_NEW_DATA_INTERUPT", 0 0, o0x7f9a98e32308;  0 drivers
+v0x7f9a98f15260_0 .var "CPU_2_INPUT_REQUEST_DATA_INTERUPT", 0 0;
+v0x7f9a98f152f0_0 .var "CPU_2_OUTPUT_DATA_FOUND", 0 0;
+v0x7f9a98f15380_0 .var "CPU_2_OUTPUT_DATA_NOT_FOUND", 0 0;
+v0x7f9a98f15410_0 .var "CPU_2_REQUEST_DATA_INTERUPT", 0 0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "snoop_controller.v";
