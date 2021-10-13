@@ -58,47 +58,47 @@ module alu(DATA1, DATA2, RESULT, SELECT);
     always @ (*) // this block run if there is any change in DATA1 or DATA2 or SELECT
     begin
         case (SELECT)
-            5'b00000:
-                RESULT = INTER_ADD; 
-            5'b00001:
-                RESULT = INTER_SLL; 
-            5'b00010:
-                RESULT = INTER_SLT; 
-            5'b00011:
-                RESULT = INTER_SLTU; 
+            // 5'b00000:
+            //     RESULT = INTER_ADD; 
+            // 5'b00001:
+            //     RESULT = INTER_SLL; 
+            // 5'b00010:
+            //     RESULT = INTER_SLT; 
+            // 5'b00011:
+            //     RESULT = INTER_SLTU; 
 
-            5'b00100:
-                RESULT = INTER_XOR; 
-            5'b00101:
-                RESULT = INTER_SRL; 
-            5'b00110:
-                RESULT = INTER_OR; 
-            5'b00111:
-                RESULT = INTER_AND; 
-            // commands for mul unit
-            5'b01000:
-                RESULT = INTER_MUL; 
-            5'b01001:
-                RESULT = INTER_MUL; 
-            5'b01010:
-                RESULT = INTER_MULHSU; 
-            5'b01011:
-                RESULT = INTER_MULHU; 
+            // 5'b00100:
+            //     RESULT = INTER_XOR; 
+            // 5'b00101:
+            //     RESULT = INTER_SRL; 
+            // 5'b00110:
+            //     RESULT = INTER_OR; 
+            // 5'b00111:
+            //     RESULT = INTER_AND; 
+            // // commands for mul unit
+            // 5'b01000:
+            //     RESULT = INTER_MUL; 
+            // 5'b01001:
+            //     RESULT = INTER_MUL; 
+            // 5'b01010:
+            //     RESULT = INTER_MULHSU; 
+            // 5'b01011:
+            //     RESULT = INTER_MULHU; 
 
-            5'b01100:
-                RESULT = INTER_DIV; 
-            5'b01101:
-                RESULT = INTER_REM; 
-            5'b01111:
-                RESULT = INTER_REMU; 
+            // 5'b01100:
+            //     RESULT = INTER_DIV; 
+            // 5'b01101:
+            //     RESULT = INTER_REM; 
+            // 5'b01111:
+            //     RESULT = INTER_REMU; 
             
-            // additional commands
-            5'b10001:
-                RESULT = INTER_SRA; 
-            5'b10000:
-                RESULT = INTER_SUB; 
-            5'b11xxx:
-                RESULT = INTER_FWD; 
+            // // additional commands
+            // 5'b10001:
+            //     RESULT = INTER_SRA; 
+            // 5'b10000:
+            //     RESULT = INTER_SUB; 
+            // 5'b11xxx:
+            //     RESULT = INTER_FWD; 
                 
             default: RESULT = 0; //result 0 if the other cases
         endcase
