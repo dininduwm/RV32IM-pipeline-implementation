@@ -127,9 +127,57 @@ module snoopcontroller(BROADCAST_ADDR_BUS,
     always @ (posedge CPU_1_INPUT_REQUEST_DATA_INTERUPT, posedge CPU_2_INPUT_REQUEST_DATA_INTERUPT) begin 
         #0.005 // this delay will make time for the multiplexing 
         BROADCAST_ADDR_BUS = SELECTED_PE_ADDR;
-        BROADCAST_DATA_BUS = SELECTED_PE_DATA;
-
+        // BROADCAST_DATA_BUS = SELECTED_PE_DATA;
         
+        // Requesting from CPU 1
+        CPU_1_REQUEST_DATA_INTERUPT = 1'b1;
+        #0.004
+        CPU_1_REQUEST_DATA_INTERUPT = 1'b0;
+        #0.1 // wait for the PE to respond
+        
+        // if data not available in CPU1
+        if (CPU_1_INPUT_DATA_NOT_AVAILABLE == 1'b1)
+            begin
+                // Requesting from CPU 1
+                CPU_2_REQUEST_DATA_INTERUPT = 1'b1;
+                #0.004
+                CPU_2_REQUEST_DATA_INTERUPT = 1'b0;
+                #0.1 // wait for the PE to respond
+
+                // checking the data status from PE2
+                if (CPU_2_INPUT_DATA_NOT_AVAILABLE == 1'b1)
+                    begin
+                        
+                        CPU_1_OUTPUT_DATA_NOT_FOUND = 1'b1;
+                        #0.004
+                        CPU_1_OUTPUT_DATA_NOT_FOUND = 1'b0;
+                        #0.004;
+                    end
+                else
+                    begin
+                        PE_IDX = 1;
+                        #0.1 // wait for the multiplex
+                        BROADCAST_DATA_BUS = SELECTED_PE_DATA;
+                        // sending the interupt to PE mentioning data found
+                        CPU_1_OUTPUT_DATA_FOUND = 1'b1;
+                        #0.004
+                        CPU_1_OUTPUT_DATA_FOUND = 1'b0;
+                        #0.004;
+                    end
+            end
+        else
+            begin
+                PE_IDX = 1;
+                #0.1 // wait for the multiplex
+                BROADCAST_DATA_BUS = SELECTED_PE_DATA;
+                // sending the interupt to PE mentioning data found
+                CPU_1_OUTPUT_DATA_FOUND = 1'b1;
+                #0.004
+                CPU_1_OUTPUT_DATA_FOUND = 1'b1;
+                #0.004
+            end
+
+        // wait (vif.xn_valid == 1'b1);
     end
     
 
